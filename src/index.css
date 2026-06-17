@@ -1,0 +1,144 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600;1,700&family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&family=Space+Grotesk:wght@400;500;600;700&family=Syne:wght@400;600;700;800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Syne", "Space Grotesk", sans-serif;
+  --font-serif: "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-gold: #C5A059;
+  --color-gold-hover: #B38F46;
+  --color-navy-deep: #0A192F;
+  --color-slate-text: #64748B;
+  --color-cream-bg: #FAFAFA;
+}
+
+/* Custom styles for high-fidelity interactive elements */
+::selection {
+  background-color: rgba(197, 160, 89, 0.15);
+  color: #0A192F;
+}
+
+/* Custom scrollbar matching Linear.app light style */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #FAFAFA;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #E2E8F0;
+  border: 2px solid #FAFAFA;
+  border-radius: 9999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #CBD5E1;
+}
+
+@layer base {
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+
+  .lenis {
+    height: auto;
+  }
+
+  .lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  .lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+
+  .lenis-stopped {
+    overflow: hidden;
+  }
+
+  .lenis-scrolling iframe {
+    pointer-events: none;
+  }
+
+  body {
+    background-color: #FAFAFA;
+    color: #64748B;
+    font-family: var(--font-sans);
+    overflow-x: hidden;
+  }
+}
+
+/* Modern ink typographic gradient with high luxury feel */
+.text-navy-gradient {
+  color: #0A192F;
+  background: linear-gradient(135deg, #0A192F 0%, #172A45 60%, #30475E 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.text-gold-gradient {
+  color: #C5A059;
+  background: linear-gradient(135deg, #D4B270 0%, #C5A059 50%, #A37E38 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+/* Subtle editorial grid overlay */
+.grid-overlay {
+  background-size: 50px 50px;
+  background-image: 
+    linear-gradient(to right, rgba(148, 163, 184, 0.08) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(148, 163, 184, 0.08) 1px, transparent 1px);
+}
+
+/* Smooth Infinite Ticker Marquee matching Leonid portfolio cues */
+@keyframes marquee {
+  0% { transform: translate3d(0, 0, 0); }
+  100% { transform: translate3d(-33.333%, 0, 0); }
+}
+
+.animate-marquee-slow {
+  display: flex;
+  width: max-content;
+  animation: marquee 35s linear infinite;
+}
+
+.animate-marquee-slow:hover {
+  animation-play-state: paused;
+}
+
+/* Accurate GPU-optimized glowing blob keyframe movement */
+@keyframes glow-blob {
+  0% {
+    transform: translate3d(0px, 0px, 0) scale(0.95);
+  }
+  33% {
+    transform: translate3d(24px, -32px, 0) scale(1.08);
+  }
+  66% {
+    transform: translate3d(-12px, 20px, 0) scale(0.98);
+  }
+  100% {
+    transform: translate3d(0px, 0px, 0) scale(0.95);
+  }
+}
+
+.animate-glow-blob {
+  animation: glow-blob 22s ease-in-out infinite;
+  will-change: transform;
+}
+
+/* High-fidelity hover animations for links and cards */
+.magnetic-link-container {
+  display: inline-block;
+  position: relative;
+}
+
+
