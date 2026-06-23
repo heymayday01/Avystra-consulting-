@@ -136,13 +136,14 @@ interface BlobProps {
   color?: string; // e.g. 'bg-[#C5A059]'
   delay?: number;
 }
-export function BackgroundGlowBlob({ className = '', color = 'bg-[#C5A059]/5', delay = 0 }: BlobProps) {
+export function BackgroundGlowBlob({ className = '', color = 'rgba(197, 160, 89, 0.05)', delay = 0 }: BlobProps) {
   return (
     <div
       style={{
         animationDelay: `${delay}s`,
+        background: `radial-gradient(circle, ${color} 0%, transparent 60%)`
       }}
-      className={`absolute rounded-full filter blur-[100px] pointer-events-none mix-blend-multiply animate-glow-blob ${color} ${className}`}
+      className={`absolute rounded-full pointer-events-none animate-glow-blob ${className}`}
     />
   );
 }

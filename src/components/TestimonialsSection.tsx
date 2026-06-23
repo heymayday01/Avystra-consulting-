@@ -1,0 +1,128 @@
+import React from 'react';
+import { Quote, Star, MessageSquare } from 'lucide-react';
+import { motion } from 'motion/react';
+import { BackgroundGlowBlob } from './DoodleWidgets';
+import TextReveal from './TextReveal';
+
+interface Testimonial {
+  id: string;
+  quote: string;
+  name: string;
+  role: string;
+  company: string;
+  initial: string;
+}
+
+export default function TestimonialsSection() {
+  const testimonials: Testimonial[] = [
+    {
+      id: 'testimonial-1',
+      quote: '"Three months after the program, our managers are having conversations they would have avoided before. Measurable change — not just a good day."',
+      name: 'Rajesh M.',
+      role: 'HR Head',
+      company: 'Manufacturing, Delhi',
+      initial: 'R'
+    },
+    {
+      id: 'testimonial-2',
+      quote: '"The assessment before the program made all the difference. They understood our actual problems before walking in. It felt built for us, not off a shelf."',
+      name: 'Sunita K.',
+      role: 'Founder',
+      company: 'Technology Firm, Noida',
+      initial: 'S'
+    },
+    {
+      id: 'testimonial-3',
+      quote: '"Accountability was our biggest gap. Six weeks later, project follow-through has improved significantly. The frameworks are actually being used."',
+      name: 'Amit S.',
+      role: 'CEO',
+      company: '80-person Company, Gurgaon',
+      initial: 'A'
+    }
+  ];
+
+  return (
+    <section id="testimonials" className="relative py-8 bg-transparent border-none overflow-hidden md:py-12">
+
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 select-none">
+        
+        {/* Section Heading Container */}
+        <motion.div 
+          initial={{ opacity: 0, y: 30 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: "-20px" }}
+          transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+          className="flex flex-col items-center text-center max-w-3xl mx-auto mb-10 md:mb-12"
+        >
+          
+          {/* Aesthetic Capsule Badge */}
+          <div className="border border-[#C5A059]/20 liquid-glass px-4 py-1.5 rounded-full inline-flex items-center gap-2.5 mb-6 shadow-sm">
+            <MessageSquare className="w-3.5 h-3.5 text-[#C5A059]" />
+            <span className="text-[10px] text-[#C5A059] font-mono tracking-[0.18em] font-medium uppercase">
+              Client Success Stories
+            </span>
+          </div>
+
+          {/* Heading - Styled like trusted by industry leaders */}
+          <h2 className="font-display font-medium text-4xl sm:text-5xl md:text-6xl text-[#0A192F] tracking-tight leading-[1.1] mb-6 inline-flex flex-wrap gap-x-2">
+            <TextReveal text="Trusted by " delay={0.2} blur={true} wordClassName="inline-block" />
+            <TextReveal text="Industry" delay={0.4} blur={true} wordClassName="font-serif italic font-light text-[#C5A059] inline-block" />
+            <TextReveal text="Leaders" delay={0.5} blur={true} wordClassName="inline-block" />
+          </h2>
+
+        </motion.div>
+
+        {/* Testimonials Grid Row */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 sm:gap-6 lg:gap-8 gsap-stagger-container">
+          {testimonials.map((testimonial) => (
+            <div
+              key={testimonial.id}
+              className="gsap-stagger-card group relative liquid-glass rounded-2xl p-8 sm:p-10 transition-all duration-700 hover:border-[#C5A059]/40 hover:shadow-[0_40px_80px_-20px_rgba(15,23,42,0.12)] hover:-translate-y-2 hover:scale-[1.01] flex flex-col justify-between will-change-transform"
+              id={`testimonial-card-${testimonial.id}`}
+            >
+              <div>
+                {/* Quote Icon Badge */}
+                <div className="w-9 h-9 rounded-full bg-[#C5A059]/5 border border-[#C5A059]/10 flex items-center justify-center mb-6 text-[#C5A059]">
+                  <Quote className="w-4 h-4 fill-[#C5A059]/10" />
+                </div>
+
+                {/* Star Ratings */}
+                <div className="flex items-center gap-1 mb-5">
+                  {[...Array(5)].map((_, starIdx) => (
+                    <Star key={starIdx} className="w-4 h-4 fill-[#C5A059] text-[#C5A059] stroke-[1.5]" />
+                  ))}
+                </div>
+
+                {/* Elegant Testimonial Quote */}
+                <p className="font-serif italic text-slate-700 text-base sm:text-lg leading-[1.65] font-light mb-8">
+                  {testimonial.quote}
+                </p>
+              </div>
+
+              {/* Card Footer Divider & Avatar */}
+              <div className="border-t border-slate-100/90 pt-6 mt-auto">
+                <div className="flex items-center gap-3.5">
+                  {/* Luxury Initials Avatar */}
+                  <div className="w-11 h-11 rounded-full bg-[#C5A059]/10 text-[#C5A059] font-serif italic font-bold text-base flex items-center justify-center shrink-0 border border-[#C5A059]/20 shadow-inner">
+                    {testimonial.initial}
+                  </div>
+                  
+                  {/* Authorship Info */}
+                  <div className="flex flex-col">
+                    <span className="font-display font-medium text-sm text-[#0A192F] tracking-wide">
+                      {testimonial.name}
+                    </span>
+                    <span className="text-xs text-slate-500 mt-0.5 font-sans font-light">
+                      {testimonial.role}, <span className="text-[#C5A059] font-medium">{testimonial.company}</span>
+                    </span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+
+      </div>
+    </section>
+  );
+}

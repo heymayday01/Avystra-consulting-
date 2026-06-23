@@ -1,0 +1,5 @@
+# Robots.txt for AVYSTRA Consulting Private Limited
+User-agent: *
+Allow: /
+
+Sitemap: https://avystra.co.in/sitemap.xml

@@ -62,8 +62,8 @@ export default function Magnetic({ children, range = 24 }: MagneticProps) {
 
   return (
     <div ref={containerRef} className="inline-block w-full sm:w-auto">
-      {React.cloneElement(children, {
-        className: `${children.props.className || ''} magnetic-target`.trim(),
+      {React.cloneElement(children as React.ReactElement<any>, {
+        className: `${((children as React.ReactElement<any>).props.className || '')} magnetic-target`.trim(),
       })}
     </div>
   );

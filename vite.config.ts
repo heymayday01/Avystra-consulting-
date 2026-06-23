@@ -11,6 +11,19 @@ export default defineConfig(() => {
         '@': path.resolve(__dirname, '.'),
       },
     },
+    build: {
+      // PERFORMANCE: Splitting bundle to reduce main bundle size and improve load speeds
+      rollupOptions: {
+        output: {
+          manualChunks: {
+            'three': ['three'],
+            'r3f': ['@react-three/fiber', '@react-three/drei'],
+            'gsap': ['gsap'],
+            'vendor': ['react', 'react-dom']
+          }
+        }
+      }
+    },
     server: {
       // HMR is disabled in AI Studio via DISABLE_HMR env var.
       // Do not modifyâfile watching is disabled to prevent flickering during agent edits.

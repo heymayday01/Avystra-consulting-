@@ -48,6 +48,7 @@ export default function AvystraLogo({
         <path
           d="M60 2Q60 18 51 18Q60 18 60 34Q60 18 69 18Q60 18 60 2Z"
           fill="#C5A059"
+          className="origin-[60px_18px] transition-transform duration-700 ease-out group-hover:rotate-[180deg]"
           id="logo-star"
         />
         
