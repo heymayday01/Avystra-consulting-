@@ -1,42 +1,73 @@
-import React, { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { HelpCircle, ChevronDown } from 'lucide-react';
 import { motion, AnimatePresence } from 'motion/react';
-import { BackgroundGlowBlob } from './DoodleWidgets';
 
 interface FAQItem {
   question: string;
   answer: string;
 }
 
+const faqData: FAQItem[] = [
+  {
+    question: 'What does AVYSTRA actually do?',
+    answer: 'AVYSTRA is a strategic performance and execution consulting firm. We help organizations identify where performance is breaking down and build the clarity, accountability, management, and execution systems required to improve how the business actually runs.'
+  },
+  {
+    question: 'Who is AVYSTRA for?',
+    answer: 'AVYSTRA is built for founders, business owners, CEOs, HR leaders, and senior leadership teams who feel that growth is slowing because too much still depends on a few people, decisions are delayed, accountability is inconsistent, or execution is not translating strategy into results.'
+  },
+  {
+    question: 'Is AVYSTRA a training company or a consulting firm?',
+    answer: 'Neither label alone is enough. AVYSTRA does not run one-off workshops and leave. It diagnoses root causes, designs the right performance system, supports implementation, and measures whether the intervention is producing visible business improvement.'
+  },
+  {
+    question: 'What makes AVYSTRA different from a typical workshop-based intervention?',
+    answer: 'Most workshop-led interventions stop at delivery. AVYSTRA is built around four stages — Assess, Design, Deliver, and Measure — so the focus is not participant satisfaction alone, but whether leadership, managers, teams, and systems actually improve after the work is done.'
+  },
+  {
+    question: 'What is the Organizational Growth Index (OGI)?',
+    answer: 'The OGI is AVYSTRA\'s structured assessment that helps organizations identify growth bottlenecks across four dimensions: Leadership Direction, Manager Effectiveness, Team Accountability, and Execution Systems. It uses 15 questions to generate a directional report based on self-reported responses.'
+  },
+  {
+    question: 'How long does the OGI take, and what do I get at the end?',
+    answer: 'The OGI takes about 3 to 4 minutes and includes 15 questions. At the end, the user receives an instant report with an overall score out of 100, a growth band, a four-dimension breakdown, pattern flags, and recommended focus areas.'
+  },
+  {
+    question: 'Is the OGI a full organizational audit?',
+    answer: 'No. The OGI is a directional diagnostic, not a full audit. It is based on self-reported responses, so it helps surface likely gaps quickly, but a deeper AVYSTRA-led assessment is needed if you want higher-confidence diagnosis and a structured intervention plan.'
+  },
+  {
+    question: 'What kind of problems does AVYSTRA usually help solve?',
+    answer: 'AVYSTRA is most relevant when organizations face founder dependency, weak management capability, poor follow-through, delayed decisions, unclear ownership, inconsistent standards, cross-functional friction, or execution gaps between plans and results.'
+  },
+  {
+    question: 'Do you only help with leadership and training?',
+    answer: 'No. Leadership capability matters, but AVYSTRA\'s work is broader than leadership development. It also addresses decision rights, accountability, manager effectiveness, communication patterns, execution discipline, and the operating systems that shape day-to-day performance.'
+  },
+  {
+    question: 'How do we know whether we need AVYSTRA?',
+    answer: 'A simple test is this: if your organization is working hard but key outcomes still depend too heavily on the founder or a few individuals, you likely do not have an effort problem — you have a structure, management, or execution problem. That is exactly where AVYSTRA fits.'
+  }
+];
+
 export default function FAQSection() {
   const [openIndex, setOpenIndex] = useState<number | null>(null);
 
-  const faqData: FAQItem[] = [
-    {
-      question: 'What makes AVYSTRA different from traditional consulting firms?',
-      answer: 'Unlike traditional consulting firms that deliver high-level strategy slides and leave execution to your teams, AVYSTRA works as an embedded operational architect. We design, pilot, and institutionalize repeatable delegation and SOP frameworks. We are process mechanics who build sustainable execution pipelines, not just advisors.'
-    },
-    {
-      question: 'How long does a typical engagement last?',
-      answer: 'Engagement length depends on enterprise scale and structural complexity, typically ranging from 90 to 180 days. Every project begins with a granular, 14-day operational audit (the Strategic Alignment diagnostic), followed by immediate priority-mapping, SOP design, and tailored middle-management training.'
-    },
-    {
-      question: 'Do you work with companies of all sizes?',
-      answer: 'Our sweet spot is high-growth mid-market enterprises and well-funded startups ($10M to $100M ARR) experiencing painful scaling friction. At this stage, coordination costs exponentially balloon, and structural ambiguity threatens founder velocity. We also advise selective Fortune 500 business units.'
-    },
-    {
-      question: 'What does the initial diagnostic involve?',
-      answer: 'The initial diagnostic is a deep critical-path audit of your current delegation, alignment, and strategy networks. Over two weeks, we conduct brief executive interviews, perform strategy-leakage diagnostics, and trace communication workflows to pinpoint precise friction centers before detailing a bespoke architectural playbook.'
-    },
-    {
-      question: 'How do you measure success?',
-      answer: 'We measure success through three tangible operational indices: Strategic Velocity (how quickly priorities translate to frontline outputs), Middle-Management Autonomy (the percentage of daily decisions resolved without executive escalation), and the Talent Retention Index (reduction of friction-based key staff attrition).'
-    }
-  ];
-
-  const toggleIndex = (index: number) => {
-    setOpenIndex(openIndex === index ? null : index);
-  };
+  const toggleIndex = useCallback((index: number) => {
+    setOpenIndex(prev => prev === index ? null : index);
+    setTimeout(() => {
+      if (typeof window !== "undefined") {
+        const ScrollTrigger = (window as any).ScrollTrigger;
+        if (ScrollTrigger) {
+          ScrollTrigger.refresh();
+        }
+        const lenis = (window as any).lenis;
+        if (lenis) {
+          lenis.resize();
+        }
+      }
+    }, 500);
+  }, []);
 
   return (
     <section id="faq" className="relative py-8 bg-transparent border-none overflow-hidden md:py-12">
@@ -52,11 +83,11 @@ export default function FAQSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-center text-center max-w-3xl mx-auto mb-10 md:mb-12"
+          className="flex flex-col items-center text-center max-w-3xl mx-auto mb-6 md:mb-8"
         >
           
           {/* Aesthetic Badge */}
-          <div className="border border-[#C5A059]/20 liquid-glass px-4 py-1.5 rounded-full inline-flex items-center gap-2 mb-6 shadow-sm">
+          <div className="border border-[#C5A059]/20 bg-gradient-to-br from-white to-slate-50 px-4 py-1.5 rounded-full inline-flex items-center gap-2 mb-3 shadow-sm">
             <HelpCircle className="w-3.5 h-3.5 text-[#C5A059]" />
             <span className="text-[10px] text-[#C5A059] font-mono tracking-[0.18em] font-medium uppercase">
               Common Questions
@@ -80,28 +111,36 @@ export default function FAQSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-50px" }}
           transition={{ duration: 1, delay: 0.2, ease: [0.16, 1, 0.3, 1] }}
-          className="liquid-glass rounded-[2.5rem] p-6 sm:p-10 divide-y divide-slate-300/20"
+          className="bg-gradient-to-br from-white to-slate-50 border border-slate-100 rounded-[2.5rem] p-6 sm:p-10 divide-y divide-slate-300/20"
         >
           {faqData.map((faq, index) => {
             const isOpen = openIndex === index;
+            const numberStr = (index + 1).toString().padStart(2, '0');
             return (
               <div 
                 key={index} 
                 className={`py-5 first:pt-2 last:pb-2 transition-all duration-300 ${
-                  isOpen ? 'bg-slate-50/20 px-3 -mx-3 rounded-xl border border-transparent' : 'border-transparent'
+                  isOpen ? 'bg-slate-50/30 px-4 -mx-4 rounded-2xl border border-[#C5A059]/10' : 'border-transparent'
                 }`}
               >
                 {/* Accordion Toggle Header */}
                 <button
                   onClick={() => toggleIndex(index)}
-                  className="w-full flex items-center justify-between text-left gap-6 group cursor-pointer focus:outline-none"
+                  className="w-full flex items-center justify-between text-left gap-4 sm:gap-6 group cursor-pointer focus:outline-none"
                   aria-expanded={isOpen}
                 >
-                  <span className={`font-sans font-medium text-base sm:text-[17px] leading-snug transition-colors duration-300 ${
-                    isOpen ? 'text-[#C5A059]' : 'text-[#0A192F] group-hover:text-[#C5A059]'
-                  }`}>
-                    {faq.question}
-                  </span>
+                  <div className="flex items-center gap-4 sm:gap-6 flex-1">
+                    {/* Index Number Badge */}
+                    <span className="font-mono text-xs sm:text-sm font-black text-[#C5A059]/80 bg-[#C5A059]/5 border border-[#C5A059]/20 w-8 h-8 rounded-lg flex items-center justify-center shrink-0">
+                      {numberStr}
+                    </span>
+                    
+                    <span className={`font-sans font-medium text-base sm:text-[17px] leading-snug transition-colors duration-300 flex-1 ${
+                      isOpen ? 'text-[#C5A059]' : 'text-[#0A192F] group-hover:text-[#C5A059]'
+                    }`}>
+                      {faq.question}
+                    </span>
+                  </div>
                   
                   {/* Circle Indicator around chevrons */}
                   <div className={`w-8 h-8 rounded-full flex items-center justify-center shrink-0 border transition-all duration-300 ${
@@ -114,7 +153,7 @@ export default function FAQSection() {
                     }`} />
                   </div>
                 </button>
-
+ 
                 {/* Animated Inner Answer Panel */}
                 <AnimatePresence initial={false}>
                   {isOpen && (
@@ -138,7 +177,7 @@ export default function FAQSection() {
                       }}
                       className="overflow-hidden"
                     >
-                      <div className="pt-4 pb-2 pr-10 text-slate-500 text-sm sm:text-base leading-relaxed font-light">
+                      <div className="pt-4 pb-2 pl-12 pr-4 sm:pl-14 text-slate-500 text-sm sm:text-base leading-relaxed font-light">
                         {faq.answer}
                       </div>
                     </motion.div>

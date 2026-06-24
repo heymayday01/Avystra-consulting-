@@ -1,6 +1,8 @@
 import React, { useState, useEffect, useMemo, useCallback, useRef } from "react";
 import { ArrowUpRight } from "lucide-react";
 import { motion, AnimatePresence, useReducedMotion } from "motion/react";
+import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import AvystraLogo from "./AvystraLogo";
 
 interface NavItem {
@@ -19,79 +21,98 @@ export default function Header() {
   const activeSectionRef = useRef("bottlenecks");
 
   useEffect(() => {
-    const updateActiveSection = () => {
-      const scrollPosition = window.scrollY + window.innerHeight * 0.45;
-      const sections = ["bottlenecks", "process", "team", "consult"];
-      
-      let matched = "";
-      for (const id of sections) {
-        const el = document.getElementById(id);
-        if (el) {
-          const rect = el.getBoundingClientRect();
-          const top = rect.top + window.scrollY;
-          const height = rect.height;
-          if (scrollPosition >= top && scrollPosition < top + height) {
-            matched = id;
-            break;
-          }
-        }
-      }
-      if (matched && matched !== activeSectionRef.current) {
-        activeSectionRef.current = matched;
-        setActiveSection(matched);
-      }
-    };
+    // Register GSAP ScrollTrigger
+    gsap.registerPlugin(ScrollTrigger);
 
-    const handleScroll = () => {
+    const handleScrollState = () => {
       const isScrolled = window.scrollY > 15;
       setScrolled((prev) => (prev !== isScrolled ? isScrolled : prev));
-      updateActiveSection();
     };
 
-    // Initial evaluation to guarantee correct active tab on refresh or deep links
-    handleScroll();
+    // Lightweight scroll listener for header active style ONLY
+    window.addEventListener("scroll", handleScrollState, { passive: true });
+    handleScrollState();
 
-    window.addEventListener("scroll", handleScroll, { passive: true });
-
-    // Link directly into the global Lenis instance scroll engine for real-time fidelity
     const lenisInstance = (window as any).lenis;
     if (lenisInstance) {
-      lenisInstance.on("scroll", handleScroll);
+      lenisInstance.on("scroll", handleScrollState);
     }
 
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-      if (lenisInstance) {
-        lenisInstance.off("scroll", handleScroll);
+    // Set up ultra-smooth GSAP ScrollTriggers for high-fidelity section synchronization
+    const sections = ["bottlenecks", "process", "programs", "team", "consult"];
+    const triggers: ScrollTrigger[] = [];
+
+    // Let ScrollTrigger compute exact offsets during layout phases rather than scroll loops
+    sections.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) {
+        const trigger = ScrollTrigger.create({
+          trigger: el,
+          start: "top 45%",
+          end: "bottom 45%",
+          onToggle: (self) => {
+            if (self.isActive && activeSectionRef.current !== id) {
+              activeSectionRef.current = id;
+              setActiveSection(id);
+            }
+          },
+          onEnter: () => {
+            if (activeSectionRef.current !== id) {
+              activeSectionRef.current = id;
+              setActiveSection(id);
+            }
+          },
+          onEnterBack: () => {
+            if (activeSectionRef.current !== id) {
+              activeSectionRef.current = id;
+              setActiveSection(id);
+            }
+          },
+        });
+        triggers.push(trigger);
       }
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScrollState);
+      if (lenisInstance) {
+        lenisInstance.off("scroll", handleScrollState);
+      }
+      triggers.forEach((t) => t.kill());
     };
   }, []);
 
   const navItems: NavItem[] = useMemo(() => [
     {
-      name: "Bottlenecks",
+      name: "The Problem",
       href: "#bottlenecks",
       number: "01",
       desc: "Structural points of friction",
     },
     {
-      name: "How We Work",
+      name: "What We Do",
       href: "#process",
       number: "02",
       desc: "Our procedural roadmap",
     },
     {
-      name: "Consulting Team",
-      href: "#team",
+      name: "Programs",
+      href: "#programs",
       number: "03",
-      desc: "Meet our lead partners",
+      desc: "Bespoke system training",
     },
     {
-      name: "Diagnostic Form",
-      href: "#consult",
+      name: "About",
+      href: "#team",
       number: "04",
-      desc: "Process assessment hub",
+      desc: "The founder's background",
     },
+    {
+      name: "Contact",
+      href: "#consult",
+      number: "05",
+      desc: "Tell us about your organization",
+    }
   ], []);
 
   const handleScrollTo = useCallback((
@@ -144,7 +165,7 @@ export default function Header() {
   }), []);
 
   return (
-    <div className="fixed top-4 left-0 right-0 z-[60] flex justify-center px-4 pointer-events-none">
+    <div className={`fixed left-0 right-0 z-[60] flex justify-center px-4 pointer-events-none transition-all duration-300 ${scrolled || isOpen ? "top-2 md:top-3" : "top-[52px] sm:top-[60px]"}`}>
       <motion.header
         initial={{ y: -30, opacity: 0 }}
         animate={{
@@ -303,7 +324,7 @@ export default function Header() {
                   transition={{ delay: navItems.length * 0.05, duration: 0.4 }}
                   href="#consult"
                   onClick={(e) => handleScrollTo(e, "consult")}
-                  className="w-full mt-3 py-3.5 bg-[#0A192F] text-white font-bold font-display text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-2 rounded-2xl shadow-lg active:scale-[0.98] transition-transform"
+                  className="w-full mt-3 py-3.5 bg-navy-deep text-white font-bold font-display text-[10px] uppercase tracking-[0.2em] flex items-center justify-center gap-2 rounded-2xl shadow-lg active:scale-[0.98] transition-transform"
                 >
                   Begin Diagnostic
                   <ArrowUpRight className="w-3.5 h-3.5 text-[#C5A059]" />

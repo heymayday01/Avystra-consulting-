@@ -16,10 +16,10 @@ export default defineConfig(() => {
       rollupOptions: {
         output: {
           manualChunks: {
-            'three': ['three'],
-            'r3f': ['@react-three/fiber', '@react-three/drei'],
             'gsap': ['gsap'],
-            'vendor': ['react', 'react-dom']
+            'vendor': ['react', 'react-dom'],
+            'motion': ['motion', 'motion/react'],
+            'icons': ['lucide-react']
           }
         }
       }

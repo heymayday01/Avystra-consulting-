@@ -8,7 +8,6 @@ import {
   ArrowRight, 
   Loader2, 
   CheckCircle, 
-  Database,
   TrendingUp,
   Award,
   Zap,
@@ -33,91 +32,91 @@ interface Question {
 }
 
 const questions: Question[] = [
-  // DIMENSION 1 — Leadership & Direction (code: L, color: navy #1B2A6B)
+  // DIMENSION 1 — Leadership & Direction (code: L, color: navy #2C3947)
   {
     id: 1,
     dimensionCode: 'L',
     dimensionName: 'Leadership & Direction',
-    color: '#1B2A6B',
+    color: '#2C3947',
     text: 'When leadership sets a new priority — does it change how teams actually work on the ground?'
   },
   {
     id: 2,
     dimensionCode: 'L',
     dimensionName: 'Leadership & Direction',
-    color: '#1B2A6B',
+    color: '#2C3947',
     text: 'Are important decisions made at the right level — without coming back to the founder every time?'
   },
   {
     id: 3,
     dimensionCode: 'L',
     dimensionName: 'Leadership & Direction',
-    color: '#1B2A6B',
+    color: '#2C3947',
     text: 'Does your organization consistently recognize and reward high performers — regardless of who they are close to?'
   },
   {
     id: 4,
     dimensionCode: 'L',
     dimensionName: 'Leadership & Direction',
-    color: '#1B2A6B',
+    color: '#2C3947',
     text: 'Does your organization run smoothly — even when the founder is not directly involved in day-to-day decisions?'
   },
-  // DIMENSION 2 — Manager Effectiveness (code: M, color: gold #C9A84C)
+  // DIMENSION 2 — Manager Effectiveness (code: M, color: gold #C2A56D)
   {
     id: 5,
     dimensionCode: 'M',
     dimensionName: 'Manager Effectiveness',
-    color: '#C9A84C',
+    color: '#C2A56D',
     text: 'When a manager gives feedback to a team member — does it lead to visible, lasting change?'
   },
   {
     id: 6,
     dimensionCode: 'M',
     dimensionName: 'Manager Effectiveness',
-    color: '#C9A84C',
+    color: '#C2A56D',
     text: 'Are promotions and salary decisions based on measurable performance — rather than personal relationships?'
   },
   {
     id: 7,
     dimensionCode: 'M',
     dimensionName: 'Manager Effectiveness',
-    color: '#C9A84C',
+    color: '#C2A56D',
     text: 'When someone underperforms consistently — does a manager address it directly and quickly?'
   },
   {
     id: 8,
     dimensionCode: 'M',
     dimensionName: 'Manager Effectiveness',
-    color: '#C9A84C',
+    color: '#C2A56D',
     text: 'Do employees in your organization feel safe raising concerns about their manager?'
   },
-  // DIMENSION 3 — Team Accountability (code: T, color: blue #3B82F6)
+  // DIMENSION 3 — Team Accountability (code: T, color: blue #547A95)
   {
     id: 9,
     dimensionCode: 'T',
     dimensionName: 'Team Accountability',
-    color: '#3B82F6',
+    color: '#547A95',
     text: 'After a meeting where tasks are agreed — are they actually completed two weeks later?'
   },
   {
     id: 10,
     dimensionCode: 'T',
     dimensionName: 'Team Accountability',
-    color: '#3B82F6',
+    color: '#547A95',
     text: 'When something goes wrong — does your organization clearly identify who was responsible?'
   },
   {
     id: 11,
     dimensionCode: 'T',
     dimensionName: 'Team Accountability',
-    color: '#3B82F6',
+    color: '#547A95',
     text: 'Are the same rules and standards applied to everyone — regardless of seniority or relationships?'
   },
   {
     id: 12,
     dimensionCode: 'T',
     dimensionName: 'Team Accountability',
-    color: '#3B82F6',
+    color: '#547A95',
     text: 'When two departments need to collaborate — does it happen smoothly and without friction?'
   },
   // DIMENSION 4 — Execution Systems (code: E, color: green #10B981)
@@ -360,9 +359,9 @@ export default function OGIDiagnostic() {
     
     let label = 'Under Review';
     let color = '';
-    if (code === 'L') { label = 'Leadership & Direction'; color = '#1B2A6B'; }
-    if (code === 'M') { label = 'Manager Effectiveness'; color = '#C9A84C'; }
-    if (code === 'T') { label = 'Team Accountability'; color = '#3B82F6'; }
+    if (code === 'L') { label = 'Leadership & Direction'; color = '#2C3947'; }
+    if (code === 'M') { label = 'Manager Effectiveness'; color = '#C2A56D'; }
+    if (code === 'T') { label = 'Team Accountability'; color = '#547A95'; }
     if (code === 'E') { label = 'Execution Systems'; color = '#10B981'; }
 
     return { score: Number(avg.toFixed(1)), pct, label, color };
@@ -376,36 +375,36 @@ export default function OGIDiagnostic() {
   const overallScorePct = Math.round((lData.pct + mData.pct + tData.pct + eData.pct) / 4);
 
   // Diagnostic Tier Allocation
-  let tierName = 'Siloed Execution';
+  let tierName = 'Execution Gap';
   let tierDesc = '';
   let tierBadgeColor = '';
-  let tierTxtColor = '';
-  let tierBorderColor = '';
+  let tierColor = '#F59E0B';
+  let tierHeadline = '';
 
-  if (overallScorePct >= 85) {
-    tierName = 'Elite Scaling (Optimized)';
+  if (overallScorePct >= 82) {
+    tierName = 'High Growth Ready';
+    tierColor = '#10B981';
+    tierHeadline = 'Strong Foundations. Specific Gaps To Close.';
     tierDesc = 'Your organization runs on strong strategic clarity, empowered managers, high accountability, and robust execution systems. Ready for heavy structural scaling with minimal friction.';
     tierBadgeColor = 'bg-emerald-50 text-emerald-700 border border-emerald-200';
-    tierTxtColor = 'text-emerald-700';
-    tierBorderColor = 'border-emerald-300';
-  } else if (overallScorePct >= 65) {
-    tierName = 'Operational Growth (Aligned)';
+  } else if (overallScorePct >= 66) {
+    tierName = 'Growth Ready';
+    tierColor = '#3B82F6';
+    tierHeadline = 'Good Intent. Execution Consistency Is The Gap.';
     tierDesc = 'Core systems and strategies are mostly aligned, but execution remains variable or dependent on specific key players. Scaling is feasible but will create strain without standardizing manager authority.';
     tierBadgeColor = 'bg-blue-50 text-blue-700 border border-blue-200';
-    tierTxtColor = 'text-blue-700';
-    tierBorderColor = 'border-blue-300';
   } else if (overallScorePct >= 45) {
-    tierName = 'Siloed Execution (Reactive)';
+    tierName = 'Execution Gap';
+    tierColor = '#F59E0B';
+    tierHeadline = 'Clear Gaps That Are Costing You Every Day.';
     tierDesc = 'Communication blocks and department silos are slowing execution. Action depends heavily on crisis control, pressure, or key managers tracking things manually. Accountability is tribal rather than systematic.';
     tierBadgeColor = 'bg-amber-50 text-amber-700 border border-amber-200';
-    tierTxtColor = 'text-amber-700';
-    tierBorderColor = 'border-amber-300';
   } else {
-    tierName = 'Founder Bound (Critical)';
+    tierName = 'Immediate Attention';
+    tierColor = '#EF4444';
+    tierHeadline = 'Significant Gaps Across Multiple Dimensions.';
     tierDesc = 'Extreme key-person dependency. Decisions must route through the founder to stay active. Underperformance lags, accountability loops are weak, and long-term plans are lost under reactive fire-fighting.';
     tierBadgeColor = 'bg-rose-50 text-rose-700 border border-rose-200';
-    tierTxtColor = 'text-rose-700';
-    tierBorderColor = 'border-rose-300';
   }
 
   // Contradictions evaluation
@@ -521,7 +520,7 @@ export default function OGIDiagnostic() {
       <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 gsap-stagger-container">
         
         {/* Content Box */}
-        <div className="liquid-glass rounded-3xl overflow-hidden min-h-[500px] flex flex-col justify-between gsap-stagger-card">
+        <div className="bg-gradient-to-br from-white to-slate-50 border border-slate-100 rounded-3xl overflow-hidden min-h-[500px] flex flex-col justify-between gsap-stagger-card">
           
           <AnimatePresence mode="wait">
             
@@ -538,15 +537,15 @@ export default function OGIDiagnostic() {
               >
                 <div className="max-w-3xl">
                   <div className="flex justify-center mb-8">
-                    <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#C5A059]/5 rounded-full border border-[#C5A059]/10 text-[11px] text-[#A68449] font-mono tracking-widest font-bold uppercase relative">
-                      <Zap className="w-3.5 h-3.5 text-[#C5A059]" />
+                    <span className="inline-flex items-center gap-2 px-4 py-1.5 bg-[#C2A56D]/5 rounded-full border border-[#C2A56D]/10 text-[11px] text-[#C2A56D] font-mono tracking-widest font-bold uppercase relative">
+                      <Zap className="w-3.5 h-3.5 text-[#C2A56D]" />
                       Organizational Diagnostic
-                      <DoodleSparkle className="-top-3 -right-4 text-[#C5A059] w-5 h-5 animate-pulse" delay={0.1} />
+                      <DoodleSparkle className="-top-3 -right-4 text-[#C2A56D] w-5 h-5 animate-pulse" delay={0.1} />
                     </span>
                   </div>
 
-                  <h2 className="font-display font-medium text-4xl sm:text-6xl text-[#0A192F] tracking-tighter leading-[0.95] mb-8">
-                    OGI — <span className="font-serif italic text-[#C5A059]">Organizational Growth Index</span>
+                  <h2 className="font-display font-medium text-4xl sm:text-6xl text-[#2C3947] tracking-tighter leading-[0.95] mb-8">
+                    OGI — <span className="font-serif italic text-[#C2A56D]">Organizational Growth Index</span>
                   </h2>
 
                   <p className="text-slate-600 font-sans text-lg sm:text-xl max-w-xl mx-auto leading-relaxed font-light mb-12">
@@ -555,16 +554,16 @@ export default function OGIDiagnostic() {
 
                   <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-12">
                     {[
-                      { name: 'Leadership', code: 'L', color: 'bg-[#1B2A6B]' },
-                      { name: 'Managers', code: 'M', color: 'bg-[#C9A84C]' },
-                      { name: 'Accountability', code: 'T', color: 'bg-[#3B82F6]' },
+                      { name: 'Leadership', code: 'L', color: 'bg-[#2C3947]' },
+                      { name: 'Managers', code: 'M', color: 'bg-[#C2A56D]' },
+                      { name: 'Accountability', code: 'T', color: 'bg-[#547A95]' },
                       { name: 'Execution', code: 'E', color: 'bg-[#10B981]' }
                     ].map((item) => (
                       <div key={item.code} className="p-4 rounded-xl bg-white/50 border border-slate-200/50 flex flex-col items-center group">
                         <span className={`w-6 h-6 rounded-full ${item.color} mb-3 flex items-center justify-center text-[10px] text-white font-mono font-bold`}>
                           {item.code}
                         </span>
-                        <h4 className="text-[10px] font-display font-bold text-[#0A192F] leading-tight">{item.name}</h4>
+                        <h4 className="text-[10px] font-display font-bold text-[#2C3947] leading-tight">{item.name}</h4>
                       </div>
                     ))}
                   </div>
@@ -573,7 +572,7 @@ export default function OGIDiagnostic() {
                 <div className="mt-4">
                   <button
                     onClick={() => setScreen('INFO_CAPTURE')}
-                    className="group inline-flex items-center gap-3 bg-[#0A192F] hover:bg-[#C5A059] text-white font-display text-sm font-semibold tracking-wider uppercase px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
+                    className="group inline-flex items-center gap-3 bg-[#2C3947] hover:bg-[#C2A56D] text-white font-display text-sm font-semibold tracking-wider uppercase px-10 py-4 rounded-xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:-translate-y-1 cursor-pointer"
                     id="ogi-btn-start"
                   >
                     <span>Begin Diagnostic</span>
@@ -862,411 +861,835 @@ export default function OGIDiagnostic() {
             )}
 
             {/* HIGH-FIDELITY RESULTS SCREEN */}
-            {screen === 'RESULTS' && (
-              <motion.div
-                key="results"
-                initial={{ opacity: 0, scale: 0.98 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0 }}
-                transition={{ duration: 0.5, ease: 'easeOut' }}
-                className="p-6 sm:p-10 md:p-12 flex flex-col justify-between h-full flex-grow text-[#0A192F]"
-                id="ogi-screen-results"
-              >
-                <div>
-                  {/* Results Header block */}
-                  <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-8 pb-6 border-b border-slate-100 gap-4">
-                    <div>
-                      <div className="flex items-center gap-2 mb-1">
-                        <CheckCircle className="w-4 h-4 text-emerald-500" />
-                        <span className="text-[10px] font-mono tracking-widest text-[#0A192F] uppercase font-bold">
-                          Assessment Successfully Indexed
-                        </span>
-                      </div>
-                      <h3 className="font-display font-semibold text-2xl text-[#0A192F] tracking-tight">
-                        Your OGI Audit Summary
-                      </h3>
-                    </div>
+            {screen === 'RESULTS' && (() => {
+              // 1. Calculate average and percentage for each pillar
+              const getPillarData = (code: 'L' | 'M' | 'T' | 'E') => {
+                const qIds = questions.filter(q => q.dimensionCode === code).map(q => q.id);
+                const sum = qIds.reduce((acc, id) => acc + (answers[id] || 3), 0);
+                const avg = sum / 4;
+                const pct = Math.round((avg / 5) * 100);
+                
+                let label = '';
+                let color = '';
+                if (code === 'L') { label = 'Leadership & Direction'; color = '#2C3947'; }
+                if (code === 'M') { label = 'Manager Effectiveness'; color = '#C2A56D'; }
+                if (code === 'T') { label = 'Team Accountability'; color = '#547A95'; }
+                if (code === 'E') { label = 'Execution Systems'; color = '#10B981'; }
 
-                    <div className="bg-slate-50 border border-slate-200/60 rounded-xl px-4 py-2 text-left sm:text-right">
-                      <span className="block text-[8px] font-mono text-slate-400 uppercase tracking-widest leading-none mb-1">Reference Code</span>
-                      <strong className="text-[11px] font-mono text-[#0A192F] block leading-none">
-                        OGI-{contact.slice(0,2).toUpperCase()}-{Date.now().toString().slice(-4)}
-                      </strong>
-                    </div>
-                  </div>
+                return { code, avg, pct, label, color };
+              };
 
-                  {/* Main Results Split: Circular Meter + Tier explanation */}
-                  <div className="grid grid-cols-1 md:grid-cols-12 gap-8 mb-10 items-center">
+              const pillarsList = [
+                getPillarData('L'),
+                getPillarData('M'),
+                getPillarData('T'),
+                getPillarData('E')
+              ];
+
+              // OGI Score = (sum of all 4 averages ÷ 4 ÷ 5) * 100
+              const sumOfAverages = pillarsList.reduce((acc, p) => acc + p.avg, 0);
+              const overallScorePct = Math.round(((sumOfAverages / 4) / 5) * 100);
+
+              // Find the 2 weakest pillars
+              const sortedPillars = [...pillarsList].sort((a, b) => a.pct - b.pct);
+              const weakPillar1 = sortedPillars[0];
+              const weakPillar2 = sortedPillars[1];
+
+              // Identify 3 lowest individual question answers from the 2 weakest pillars
+              const weakPillarCodes = [weakPillar1.code, weakPillar2.code];
+              const weakQuestions = questions
+                .filter(q => weakPillarCodes.includes(q.dimensionCode))
+                .map(q => ({
+                  ...q,
+                  answer: answers[q.id] || 3
+                }))
+                .sort((a, b) => a.answer - b.answer); // Sort ascending (lowest score first)
+
+              const lowest3Questions = weakQuestions.slice(0, 3);
+
+              const getFindingForQuestion = (qId: number): string => {
+                switch (qId) {
+                  case 1: return "Strategic priorities set at the leadership level fail to consistently shift day-to-day work routines on the front line.";
+                  case 2: return "Standard operational decisions are heavily centralized, resulting in bottleneck delays as matters route back to the founder.";
+                  case 3: return "High performance and exceptional contributions are not recognized or rewarded with clear, objective consistency.";
+                  case 4: return "Core day-to-day operations experience high friction or slow down when the founder is not directly involved.";
+                  case 5: return "Manager feedback given to team members fails to translate into visible, lasting change or behavioral improvements.";
+                  case 6: return "Promotions, salary updates, and growth paths feel influenced more by relationship status than measurable outcomes.";
+                  case 7: return "Consistent underperformance is tolerated too long and not addressed swiftly or directly by line managers.";
+                  case 8: return "Team members do not feel fully safe raising honest concerns or challenging their direct manager's feedback.";
+                  case 9: return "Commitments and milestones agreed upon during meetings are frequently missed or delayed over subsequent weeks.";
+                  case 10: return "When projects or tasks fail, ownership vanishes due to blurred responsibilities and lack of clear accountability loops.";
+                  case 11: return "Standard organizational policies and expectations are applied inconsistently based on seniority or tenure.";
+                  case 12: return "Collaborative efforts between different departments are frequently delayed by communication silos and friction.";
+                  case 13: return "The annual plan and key milestones lose momentum and tracking diligence by the middle of the fiscal year.";
+                  case 14: return "Newly introduced operational processes or tools are abandoned or ignored within three months of release.";
+                  case 15: return "The most deserving, high-performing individuals are overlooked in favor of politically connected or highly visible peers.";
+                  case 16: return "Under tight deadlines or elevated pressure, team focus and execution quality degrade significantly.";
+                  default: return "Execution consistency and structural alignment require standardization within this pillar.";
+                }
+              };
+
+              const keyFindings = lowest3Questions.map(q => getFindingForQuestion(q.id));
+
+              // Generate Top 3 Priority Actions from the 2 weakest pillars
+              const getPriorityActions = (p1Code: 'L' | 'M' | 'T' | 'E', p2Code: 'L' | 'M' | 'T' | 'E'): string[] => {
+                const actionPool = {
+                  L: [
+                    "Establish a structured delegation model specifying which decisions can be made without founder sign-off.",
+                    "Conduct a 'Founder Dependency Audit' to transition daily operations to functional department leads."
+                  ],
+                  M: [
+                    "Build a structured bi-weekly 1-on-1 cadence between managers and teams to normalize productive feedback.",
+                    "Train managers on direct, objective performance-issue scripts to address underperformance in under 48 hours."
+                  ],
+                  T: [
+                    "Implement a centralized post-meeting tracker with single-person owners and firm dates for all deliverables.",
+                    "Establish written inter-departmental SLAs to reduce friction and coordinate collaborative handoffs."
+                  ],
+                  E: [
+                    "Create a mid-year operational checkpoint to review annual plan momentum and realign lagging projects.",
+                    "Establish a standard 'Process Adoption Checklist' to monitor newly introduced workflows for at least 90 days."
+                  ]
+                };
+
+                return [
+                  actionPool[p1Code][0],
+                  actionPool[p1Code][1],
+                  actionPool[p2Code][0]
+                ];
+              };
+
+              const priorityActions = getPriorityActions(weakPillar1.code, weakPillar2.code);
+
+              // Evaluates up to 2 contradictions
+              const getContradictionsList = () => {
+                const triggered = [];
+                
+                // Pair 1: Q6 high (4-5) and Q3 low (1-2)
+                if ((answers[6] >= 4) && (answers[3] <= 2)) {
+                  triggered.push({
+                    title: "Policy vs. Informal Reality Mismatch",
+                    desc: "You indicated that promotions are based on measurable performance (Q6), yet high performers are not consistently recognized (Q3).",
+                    risk: "Indicates that while formal HR policies appear merit-based, informal networks or personal biases may override them, leading to cultural cynicism and the loss of key talent.",
+                    antidote: "Establish open, standardized calibration sessions for promotion and pay reviews, involving multiple peer managers to remove single-point subjectivity."
+                  });
+                }
+                
+                // Pair 2: Q9 high (4-5) and Q10 low (1-2)
+                if ((answers[9] >= 4) && (answers[10] <= 2)) {
+                  triggered.push({
+                    title: "Task Completion vs. Outcome Ownership Mismatch",
+                    desc: "You indicated that meeting commitments are consistently followed through (Q9), yet ownership of failures is unclear when things go wrong (Q10).",
+                    risk: "Indicates a compliance-driven culture where tasks are checked off to avoid trouble, but true outcome ownership is missing. Teams focus on output over actual business outcomes.",
+                    antidote: "Shift from tracking tasks to assigning end-to-end outcome metrics to individual owners. Use weekly post-mortems focused on systemic fixes, not blame."
+                  });
+                }
+
+                // Pair 3: Q4 high (4-5) and Q1 low (1-2)
+                if ((answers[4] >= 4) && (answers[1] <= 2)) {
+                  triggered.push({
+                    title: "Independence vs. Alignment Mismatch",
+                    desc: "You indicated that standard operations run smoothly without the founder (Q4), yet setting new priorities fails to change ground behavior (Q1).",
+                    risk: "Your organization is highly efficient at standard repeating operations but lacks the responsive feedback loops needed to adapt when strategic direction pivots. Teams operate in a self-perpetuating bubble.",
+                    antidote: "Institute cascading weekly focus reviews that bridge long-term strategic changes down to short-term sprint tasks, ensuring pivots are immediately translated to daily operations."
+                  });
+                }
+
+                // Pair 4: Q2 high (4-5) and Q7 low (1-2)
+                if ((answers[2] >= 4) && (answers[7] <= 2)) {
+                  triggered.push({
+                    title: "Operational vs. Interpersonal Leadership Mismatch",
+                    desc: "You indicated that decisions are delegated to the right levels (Q2), yet managers fail to address underperformance quickly (Q7).",
+                    risk: "While managers have the formal authority to decide and execute, they avoid the difficult accountability conversations required to address performance drag. This breeds resentment from high performers who carry the extra weight.",
+                    antidote: "Equip managers with a structured, non-accusatory conversation script and standard Performance Improvement templates to lower the psychological barrier to addressing underperformance."
+                  });
+                }
+
+                return triggered.slice(0, 2);
+              };
+
+              const detectedContradictions = getContradictionsList();
+
+              // Get recommended programs for the 2 weakest pillars
+              const getRecommendedProgramsList = (p1Code: 'L' | 'M' | 'T' | 'E', p2Code: 'L' | 'M' | 'T' | 'E') => {
+                const programMap = {
+                  L: {
+                    name: "Decision-Making Under Uncertainty",
+                    why: "This program aligns leadership's intent with frontline execution and reduces key-person dependency so standard operations don't stall in the founder's absence."
+                  },
+                  M: {
+                    name: "Feedback & Difficult Conversations",
+                    why: "Your scores indicate that feedback loops are inconsistent and underperformance is tolerated too long; this builds skills for objective, consequence-driven performance conversations."
+                  },
+                  T: {
+                    name: "Accountability & Ownership",
+                    why: "Meeting commitments and inter-departmental handoffs are leaking action; this establishes clear, systematic ownership structures that build extreme high-integrity execution."
+                  },
+                  E: {
+                    name: "Workplace Effectiveness & Execution",
+                    why: "Strategic plans lose momentum mid-year and new process compliance degrades rapidly; this instills systemic routines that convert hard work into consistent, measurable results."
+                  }
+                };
+
+                return [
+                  { pillar: p1Code, ...programMap[p1Code] },
+                  { pillar: p2Code, ...programMap[p2Code] }
+                ];
+              };
+
+              const recommendedPrograms = getRecommendedProgramsList(weakPillar1.code, weakPillar2.code);
+
+              // Get band details
+              const getResultBand = (score: number) => {
+                if (score >= 82) {
+                  return {
+                    badge: 'High Growth Ready',
+                    colour: '#10B981',
+                    headline: 'Strong Foundations. Specific Gaps To Close.',
+                    description: 'Your organization runs on strong strategic clarity, empowered managers, high accountability, and robust execution systems. Ready for heavy structural scaling with minimal friction.',
+                  };
+                } else if (score >= 66) {
+                  return {
+                    badge: 'Growth Ready',
+                    colour: '#3B82F6',
+                    headline: 'Good Intent. Execution Consistency Is The Gap.',
+                    description: 'Core systems and strategies are mostly aligned, but execution remains variable or dependent on specific key players. Scaling is feasible but will create strain without standardizing manager authority.',
+                  };
+                } else if (score >= 45) {
+                  return {
+                    badge: 'Execution Gap',
+                    colour: '#F59E0B',
+                    headline: 'Clear Gaps That Are Costing You Every Day.',
+                    description: 'Communication blocks and department silos are slowing execution. Action depends heavily on crisis control, pressure, or key managers tracking things manually. Accountability is tribal rather than systematic.',
+                  };
+                } else {
+                  return {
+                    badge: 'Immediate Attention',
+                    colour: '#EF4444',
+                    headline: 'Significant Gaps Across Multiple Dimensions.',
+                    description: 'Extreme key-person dependency. Decisions must route through the founder to stay active. Underperformance lags, accountability loops are weak, and long-term plans are lost under reactive fire-fighting.',
+                  };
+                }
+              };
+
+              const band = getResultBand(overallScorePct);
+
+              const getPillarInsightAndBadge = (code: 'L' | 'M' | 'T' | 'E', avg: number): string => {
+                let status: 'H' | 'R' | 'G' | 'C' = 'C';
+                if (avg >= 4.0) status = 'H';
+                else if (avg >= 2.8) status = 'R';
+                else if (avg >= 1.8) status = 'G';
+                else status = 'C';
+
+                if (code === 'L') {
+                  if (status === 'H') return "Your leaders create direction that consistently reaches the people who need to act on it. This is rare — and one of the strongest predictors of sustainable growth.";
+                  if (status === 'R') return "Direction is being set at the top but losing clarity on the way down. There is a gap between what leadership intends and what the organization actually does. This gap widens as you grow.";
+                  if (status === 'G') return "Leadership direction is not reaching the ground floor. Decisions are escalating upward. Teams are operating without the clarity they need. This is one of the most common and most expensive gaps in growing organizations.";
+                  return "Leadership effectiveness is a critical concern. Almost everything depends on one or two people at the top — a bottleneck that grows more damaging as the organization scales.";
+                } else if (code === 'M') {
+                  if (status === 'H') return "Your managers are genuinely leading people — not just managing tasks. Feedback is landing. Performance issues are being addressed. This is a real competitive advantage.";
+                  if (status === 'R') return "Your managers have good intent but inconsistent tools. Feedback varies by manager. Performance issues are tolerated longer than they should be. The manager layer is where strategy gets executed — or quietly dies.";
+                  if (status === 'G') return "Managers are operating more as senior individual contributors than as people leaders. Promotions appear influenced by relationships more than performance. Accountability conversations are being systematically avoided.";
+                  return "Manager effectiveness is a critical concern. Evaluations appear driven by personal bias. Important conversations are avoided. Standards are inconsistent. This creates an environment where the wrong people advance.";
+                } else if (code === 'T') {
+                  if (status === 'H') return "Your teams demonstrate strong ownership culture. People know what they are responsible for, follow through, and collaborate well. This is one of the hardest things to build — and you have it.";
+                  if (status === 'R') return "Teams are working — but ownership is blurred at the edges. Commitments made in meetings do not consistently translate into action. The result is repeated follow-up and avoidable delay.";
+                  if (status === 'G') return "There is a meaningful accountability gap. Ownership disappears when things go wrong. Cross-functional work creates friction rather than results. This drains organizational energy every day.";
+                  return "Team accountability is critically weak. The gap between what is agreed and what gets done is large. Inconsistent standards and favoritism are eroding the trust that high-performing teams require.";
+                } else {
+                  if (status === 'H') return "Your organization translates plans into consistent execution — genuinely rare. Systems are working. Measurement drives decisions. Focus now on protecting these as you scale.";
+                  if (status === 'R') return "Planning happens but execution consistency is the missing ingredient. Tracking exists but does not always drive decisions. New initiatives take too long to fully adopt.";
+                  if (status === 'G') return "Execution is inconsistent. Annual plans lose momentum by mid-year. New processes struggle to get adopted. Performance depends on individual effort rather than organizational systems.";
+                  return "Execution systems are the primary concern. Plans are made but not tracked. New initiatives are announced but not adopted. Hard work is not converting into results because the systems do not yet exist.";
+                }
+              };
+
+              const getPillarStatus = (code: 'L' | 'M' | 'T' | 'E', pct: number) => {
+                const benchmark = code === 'L' || code === 'T' ? 60 : 55;
+                if (pct >= benchmark + 8) {
+                  return {
+                    statusText: 'Strong',
+                    statusStyle: 'bg-emerald-50 text-emerald-700 border-emerald-200'
+                  };
+                } else if (pct >= benchmark) {
+                  return {
+                    statusText: 'On Track',
+                    statusStyle: 'bg-blue-50 text-blue-700 border-blue-200'
+                  };
+                } else if (pct >= benchmark - 12) {
+                  return {
+                    statusText: 'Needs Work',
+                    statusStyle: 'bg-amber-50 text-amber-700 border-amber-200'
+                  };
+                } else {
+                  return {
+                    statusText: 'Critical Gap',
+                    statusStyle: 'bg-rose-50 text-rose-700 border-rose-200'
+                  };
+                }
+              };
+
+              const strokeDasharray = 2 * Math.PI * 45;
+              const strokeDashoffset = strokeDasharray - (strokeDasharray * overallScorePct) / 100;
+
+              return (
+                <motion.div
+                  key="results"
+                  initial={{ opacity: 0, scale: 0.98 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.5, ease: 'easeOut' }}
+                  className="p-4 sm:p-8 md:p-12 flex flex-col justify-between h-full flex-grow text-[#2C3947]"
+                  id="ogi-screen-results"
+                >
+                  <div className="space-y-10">
                     
-                    {/* SVG Radial Progress Ring */}
-                    <div className="md:col-span-4 flex flex-col items-center justify-center p-6 bg-slate-50 border border-slate-200/40 rounded-2xl relative overflow-hidden">
-                      <div className="absolute inset-0 bg-[#C5A059]/[0.01]" />
-                      <div className="relative w-36 h-36 flex items-center justify-center">
+                    {/* 2.1 Header: Score circle progress and band details */}
+                    <div className="flex flex-col md:flex-row items-center gap-6 bg-gradient-to-br from-[#0D1640] to-[#12205C] rounded-2xl p-5 sm:p-8 text-white border border-blue-900/40 relative overflow-hidden shadow-lg">
+                      <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                      <div className="absolute -right-20 -top-20 w-80 h-80 bg-[#C2A56D]/5 rounded-full blur-3xl pointer-events-none" />
+
+                      {/* Circle Progress Meter */}
+                      <div className="relative flex-shrink-0 w-32 h-32 flex items-center justify-center">
                         <svg className="w-full h-full transform -rotate-90">
-                          {/* Background Ring */}
                           <circle
-                            cx="72"
-                            cy="72"
-                            r="62"
-                            className="stroke-slate-100 stroke-[8px] fill-transparent"
+                            cx="64"
+                            cy="64"
+                            r="45"
+                            className="stroke-blue-950"
+                            strokeWidth="8"
+                            fill="transparent"
                           />
-                          {/* Progress Ring */}
                           <motion.circle
-                            cx="72"
-                            cy="72"
-                            r="62"
-                            className="stroke-[8px] fill-transparent stroke-[#C5A059]"
-                            strokeDasharray={2 * Math.PI * 62}
-                            initial={{ strokeDashoffset: 2 * Math.PI * 62 }}
-                            animate={{ strokeDashoffset: 2 * Math.PI * 62 * (1 - overallScorePct / 100) }}
+                            cx="64"
+                            cy="64"
+                            r="45"
+                            stroke={band.colour}
+                            strokeWidth="8"
+                            fill="transparent"
+                            strokeDasharray={strokeDasharray}
+                            initial={{ strokeDashoffset: strokeDasharray }}
+                            animate={{ strokeDashoffset }}
                             transition={{ duration: 1.5, ease: 'easeOut' }}
                             strokeLinecap="round"
                           />
                         </svg>
-
-                        {/* Internal Score Text */}
-                        <div className="absolute text-center">
-                          <motion.span 
-                            initial={{ opacity: 0 }}
-                            animate={{ opacity: 1 }}
-                            className="block font-display font-semibold text-3xl text-[#0A192F] leading-none"
-                          >
-                            {overallScorePct}%
-                          </motion.span>
-                          <span className="block text-[9px] font-mono uppercase text-slate-400 tracking-wider mt-1.5 leading-none">
-                            Growth Index
+                        
+                        <div className="absolute flex flex-col items-center">
+                          <span className="text-3xl font-mono font-bold leading-none">
+                            {overallScorePct}
+                          </span>
+                          <span className="text-[9px] font-mono text-slate-400 uppercase tracking-widest mt-1">
+                            / 100
                           </span>
                         </div>
                       </div>
 
-                      {/* Display Tier Name */}
-                      <span className="mt-4 inline-block text-[10px] font-mono uppercase tracking-widest font-bold px-3 py-1 bg-white border border-slate-200 rounded-full shadow-2xs text-[#0A192F]">
-                        Score Weight
-                      </span>
+                      {/* Band Details */}
+                      <div className="space-y-3 text-left max-w-2xl relative z-10">
+                        <div className="flex items-center gap-2 flex-wrap">
+                          <span className="inline-flex items-center gap-1 px-2.5 py-0.5 bg-[#C2A56D]/15 rounded-full border border-[#C2A56D]/20 text-[9px] text-[#C2A56D] font-mono tracking-widest font-bold uppercase">
+                            Growth Level
+                          </span>
+                          <span 
+                            className="inline-flex items-center gap-1 px-2.5 py-0.5 rounded-full text-[9px] font-mono tracking-wider font-bold uppercase text-white shadow-sm"
+                            style={{ backgroundColor: band.colour }}
+                          >
+                            {band.badge}
+                          </span>
+                        </div>
+
+                        <h3 className="font-display font-medium text-xl sm:text-3xl text-white tracking-tight leading-tight">
+                          {band.headline}
+                        </h3>
+
+                        <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed font-light">
+                          {band.description}
+                        </p>
+
+                        <div className="p-3 bg-white/5 border border-white/10 rounded-xl text-slate-300 text-xs font-sans leading-relaxed">
+                          <strong className="text-[#C2A56D] font-semibold">Reflection Note:</strong> This report reflects how you see your organization. The most important question — would your team answer these the same way?
+                        </div>
+                      </div>
                     </div>
 
-                    {/* Performance Tier Explanation Block */}
-                    <div className="md:col-span-8 space-y-3">
-                      <div>
-                        <span className={`inline-flex items-center gap-1.5 text-xs font-mono font-bold px-3 py-1.5 rounded-full ${tierBadgeColor}`}>
-                          <Award className="w-3.5 h-3.5" />
-                          {tierName}
-                        </span>
+                    {/* 2.2 Bar Chart — Score vs Benchmark */}
+                    <div className="bg-white border border-slate-100 rounded-2xl p-6 md:p-8 shadow-sm space-y-6">
+                      <div className="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-100">
+                        <div>
+                          <h3 className="font-display font-semibold text-lg text-[#2C3947]">
+                            Score vs. Benchmark
+                          </h3>
+                          <p className="text-xs text-slate-500 font-sans font-light">
+                            Compare your scores across pillars against reference thresholds.
+                          </p>
+                        </div>
+                        <div className="flex items-center gap-4 text-xs font-mono text-slate-500">
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-3 h-3 bg-[#2C3947] rounded" /> User Score
+                          </span>
+                          <span className="flex items-center gap-1.5">
+                            <span className="w-3 border-t border-dashed border-slate-400" /> Benchmark Threshold
+                          </span>
+                        </div>
                       </div>
 
-                      <h4 className="font-display font-bold text-lg text-[#0A192F]">
-                        Assessment Context for {name}
-                      </h4>
+                      <div className="space-y-6">
+                        {pillarsList.map((p) => {
+                          const benchmark = p.code === 'L' || p.code === 'T' ? 60 : 55;
+                          const diff = p.pct - benchmark;
+                          const isAbove = diff >= 0;
 
-                      <p className="text-slate-500 font-sans text-sm sm:text-[14px] leading-relaxed font-light">
-                        {tierDesc} Since your current designation is listed as <span className="font-mono bg-slate-50 text-[#0A192F] px-1.5 py-0.5 rounded border text-xs">{role}</span>, this score implies you are carrying the core execution burden yourself instead of letting organizational systems work automatically.
+                          let PillarIcon = TrendingUp;
+                          if (p.code === 'L') PillarIcon = Award;
+                          if (p.code === 'M') PillarIcon = Briefcase;
+                          if (p.code === 'T') PillarIcon = User;
+
+                          return (
+                            <div key={p.code} className="space-y-2">
+                              <div className="flex flex-wrap items-center justify-between gap-2">
+                                <div className="flex items-center gap-2">
+                                  <span className="p-1.5 rounded-lg bg-slate-50 border border-slate-100 text-slate-700">
+                                    <PillarIcon className="w-4 h-4" style={{ color: p.color }} />
+                                  </span>
+                                  <span className="font-display font-medium text-sm text-[#2C3947]">
+                                    {p.label}
+                                  </span>
+                                  
+                                  <span className={`inline-flex items-center gap-1 px-2 py-0.5 rounded-full text-[10px] font-semibold font-mono border ${
+                                    isAbove 
+                                      ? 'bg-emerald-50 text-emerald-700 border-emerald-200' 
+                                      : 'bg-rose-50 text-rose-700 border-rose-200'
+                                  }`}>
+                                    {isAbove ? `+${diff}%` : `${diff}%`} {isAbove ? 'above' : 'below'}
+                                  </span>
+                                </div>
+                                
+                                <div className="text-sm font-mono font-bold text-[#2C3947]">
+                                  {p.pct}%
+                                </div>
+                              </div>
+
+                              <div className="relative h-4 bg-slate-50 rounded-full border border-slate-100 overflow-visible">
+                                <motion.div
+                                  className="absolute left-0 top-0 h-full rounded-full"
+                                  style={{ backgroundColor: p.color }}
+                                  initial={{ width: 0 }}
+                                  animate={{ width: `${p.pct}%` }}
+                                  transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+                                />
+
+                                <div 
+                                  className="absolute top-0 bottom-0 border-l border-dashed border-slate-400 z-10 flex flex-col items-center justify-center overflow-visible"
+                                  style={{ left: `${benchmark}%` }}
+                                >
+                                  <span className="absolute -top-4 text-[9px] font-mono text-slate-400 tracking-wider">
+                                    Target
+                                  </span>
+                                </div>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* 2.3 Pillar Cards — Performance By Dimension */}
+                    <div className="space-y-4">
+                      <div className="pb-2 border-b border-slate-100">
+                        <h3 className="font-display font-semibold text-lg text-[#2C3947]">
+                          Pillar Insights & Analysis
+                        </h3>
+                        <p className="text-xs text-slate-500 font-sans font-light">
+                          Detailed performance feedback based on your organizational scores.
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        {pillarsList.map((p) => {
+                          const insight = getPillarInsightAndBadge(p.code, p.avg);
+                          const statusObj = getPillarStatus(p.code, p.pct);
+
+                          let PillarIcon = TrendingUp;
+                          if (p.code === 'L') PillarIcon = Award;
+                          if (p.code === 'M') PillarIcon = Briefcase;
+                          if (p.code === 'T') PillarIcon = User;
+
+                          return (
+                            <div 
+                              key={p.code} 
+                              className={`p-6 rounded-2xl border transition-all duration-300 bg-gradient-to-br from-white to-slate-50/50 hover:shadow-md ${statusObj.statusStyle.split(' ')[2]} flex flex-col justify-between space-y-4`}
+                            >
+                              <div className="space-y-3">
+                                <div className="flex items-center justify-between gap-2">
+                                  <div className="flex items-center gap-2">
+                                    <span className="p-2 rounded-xl bg-white border border-slate-100 shadow-sm">
+                                      <PillarIcon className="w-5 h-5" style={{ color: p.color }} />
+                                    </span>
+                                    <h4 className="font-display font-semibold text-base text-[#2C3947]">
+                                      {p.label}
+                                    </h4>
+                                  </div>
+                                  <span className={`px-2.5 py-1 rounded-full text-xs font-semibold font-mono border ${statusObj.statusStyle}`}>
+                                    {statusObj.statusText}
+                                  </span>
+                                </div>
+
+                                <div className="flex items-baseline gap-1.5">
+                                  <span className="text-2xl font-mono font-bold text-[#2C3947]">
+                                    {p.pct}%
+                                  </span>
+                                  <span className="text-xs font-sans text-slate-400">
+                                    score
+                                  </span>
+                                </div>
+
+                                <p className="text-xs sm:text-sm text-slate-600 font-sans font-light leading-relaxed">
+                                  {insight}
+                                </p>
+                              </div>
+                            </div>
+                          );
+                        })}
+                      </div>
+                    </div>
+
+                    {/* 2.4 & 2.5 Key Findings & Priority Actions */}
+                    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                      {/* Key Findings Card */}
+                      <div className="bg-white border border-slate-100 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
+                        <div className="space-y-4">
+                          <div>
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-rose-50 rounded-full border border-rose-100 text-[10px] text-rose-700 font-mono tracking-wider font-bold uppercase mb-2">
+                              Critical Gaps
+                            </span>
+                            <h3 className="font-display font-semibold text-lg text-[#2C3947]">
+                              Key Diagnostic Findings
+                            </h3>
+                            <p className="text-xs text-slate-500 font-sans font-light">
+                              Specific bottlenecks identified based on your lowest individual responses.
+                            </p>
+                          </div>
+
+                          <ul className="space-y-4">
+                            {keyFindings.map((finding, idx) => (
+                              <li key={idx} className="flex items-start gap-3">
+                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-rose-50 border border-rose-100 text-rose-600 text-xs font-mono font-bold flex items-center justify-center mt-0.5">
+                                  {idx + 1}
+                                </span>
+                                <p className="text-xs sm:text-sm text-slate-600 font-sans font-light leading-relaxed">
+                                  {finding}
+                                </p>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+
+                      {/* Priority Actions Card */}
+                      <div className="bg-white border border-slate-100 rounded-2xl p-6 sm:p-8 shadow-sm flex flex-col justify-between space-y-6">
+                        <div className="space-y-4">
+                          <div>
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-50 rounded-full border border-emerald-100 text-[10px] text-emerald-700 font-mono tracking-wider font-bold uppercase mb-2">
+                              Strategic Focus
+                            </span>
+                            <h3 className="font-display font-semibold text-lg text-[#2C3947]">
+                              Top 3 Priority Actions
+                            </h3>
+                            <p className="text-xs text-slate-500 font-sans font-light">
+                              Practical, high-impact interventions to stabilize execution systems.
+                            </p>
+                          </div>
+
+                          <ul className="space-y-4">
+                            {priorityActions.map((action, idx) => (
+                              <li key={idx} className="flex items-start gap-3">
+                                <span className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-50 border border-emerald-100 text-emerald-600 text-xs font-mono font-bold flex items-center justify-center mt-0.5">
+                                  {idx + 1}
+                                </span>
+                                <p className="text-xs sm:text-sm text-slate-600 font-sans font-light leading-relaxed">
+                                  {action}
+                                </p>
+                              </li>
+                            ))}
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 2.6 Contradiction Detector */}
+                    {detectedContradictions.length > 0 && (
+                      <div className="bg-amber-50/40 border border-amber-100 rounded-2xl p-6 sm:p-8 space-y-6 shadow-sm">
+                        <div className="space-y-1 text-left">
+                          <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-amber-50 rounded-full border border-amber-100 text-[10px] text-amber-700 font-mono tracking-wider font-bold uppercase">
+                            <AlertTriangle className="w-3 h-3 text-amber-600" />
+                            Friction Indicators Detected
+                          </span>
+                          <h3 className="font-display font-semibold text-lg text-[#2C3947]">
+                            Your responses reveal an interesting pattern...
+                          </h3>
+                          <p className="text-xs text-slate-500 font-sans font-light">
+                            Potential structural alignments that may cause executive drag if left unresolved.
+                          </p>
+                        </div>
+
+                        <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-left">
+                          {detectedContradictions.map((item, idx) => (
+                            <div key={idx} className="bg-white border border-slate-100 rounded-xl p-5 space-y-4">
+                              <div className="flex items-center gap-2">
+                                <span className="w-1.5 h-1.5 bg-amber-500 rounded-full animate-pulse" />
+                                <h4 className="font-display font-bold text-sm text-[#2C3947] uppercase tracking-wider">
+                                  {item.title}
+                                </h4>
+                              </div>
+                              
+                              <div className="space-y-3 text-xs sm:text-sm text-slate-600 font-sans font-light leading-relaxed">
+                                <p>
+                                  <strong className="text-[#2C3947] font-semibold">Contradiction:</strong> {item.desc}
+                                </p>
+                                <p>
+                                  <strong className="text-rose-600 font-semibold">Strategic Risk:</strong> {item.risk}
+                                </p>
+                                <p className="bg-emerald-50/50 text-emerald-900 p-3 rounded-lg border border-emerald-100/55 font-light leading-relaxed">
+                                  <strong className="text-emerald-800 font-semibold block mb-1">Structural Antidote:</strong> {item.antidote}
+                                </p>
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {/* 2.7 Recommended Programs */}
+                    <div className="space-y-4 text-left">
+                      <div className="pb-2 border-b border-slate-100">
+                        <h3 className="font-display font-semibold text-lg text-[#2C3947]">
+                          Recommended Alignment Portfolios
+                        </h3>
+                        <p className="text-xs text-slate-500 font-sans font-light">
+                          Curated operational programs to address your weakest pillars directly.
+                        </p>
+                      </div>
+
+                      <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        {recommendedPrograms.map((prog, idx) => (
+                          <div key={idx} className="bg-gradient-to-br from-[#0D1640] to-[#12205C] rounded-2xl p-6 text-white border border-blue-900/40 relative overflow-hidden shadow-md">
+                            <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.01)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                            <div className="absolute -right-10 -bottom-10 w-40 h-40 bg-[#C2A56D]/5 rounded-full blur-2xl pointer-events-none" />
+                            
+                            <div className="relative z-10 space-y-4 flex flex-col justify-between h-full">
+                              <div className="space-y-2">
+                                <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#C2A56D]/15 rounded-full border border-[#C2A56D]/20 text-[9px] text-[#C2A56D] font-mono tracking-widest font-bold uppercase">
+                                  Pillar {prog.pillar} Solution
+                                </span>
+                                <h4 className="font-display font-semibold text-base text-white">
+                                  {prog.name}
+                                </h4>
+                                <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed font-light">
+                                  <strong className="text-white font-medium">Why this fits your scores:</strong> {prog.why}
+                                </p>
+                              </div>
+
+                              <a
+                                href="#programs"
+                                onClick={(e) => {
+                                  e.preventDefault();
+                                  const el = document.getElementById('programs');
+                                  if (el && (window as any).lenis) {
+                                    (window as any).lenis.scrollTo(el, { offset: -95, duration: 1.2 });
+                                  }
+                                }}
+                                className="inline-flex items-center gap-1 text-[11px] font-mono font-bold text-[#C2A56D] hover:text-white transition-colors pt-2"
+                              >
+                                Explore Portfolio Details
+                                <ArrowRight className="w-3.5 h-3.5" />
+                              </a>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+
+                    {/* 2.8 WhatsApp CTA & Interactive Booking */}
+                    <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+                      {/* WhatsApp Direct Action */}
+                      <div className="lg:col-span-5 bg-emerald-50/50 border border-emerald-150 rounded-2xl p-6 sm:p-8 flex flex-col justify-between space-y-6 text-left">
+                        <div className="space-y-4">
+                          <div>
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-emerald-100 text-emerald-800 rounded-full text-[9px] font-mono tracking-wider font-bold uppercase mb-2">
+                              Fast-Track Action
+                            </span>
+                            <h4 className="font-display font-semibold text-lg text-[#0F5132]">
+                              Discuss on WhatsApp
+                            </h4>
+                            <p className="text-xs sm:text-sm text-emerald-800 font-sans font-light leading-relaxed">
+                              Instantly connect with an Avystra Partner to debrief your custom OGI results.
+                            </p>
+                          </div>
+
+                          <div className="bg-white/60 p-4 rounded-xl border border-emerald-100/85 text-xs font-mono text-[#0F5132] italic leading-relaxed">
+                            "Hi AVYSTRA, I completed the OGI. My name is {name} ({role}). My OGI score was {overallScorePct}/100. I would like to discuss a full organizational assessment."
+                          </div>
+                        </div>
+
+                        <button
+                          onClick={() => {
+                            const msg = `Hi AVYSTRA, I completed the OGI. My name is ${name} (${role}). My OGI score was ${overallScorePct}/100. I would like to discuss a full organizational assessment.`;
+                            window.open(`https://wa.me/918596059607?text=${encodeURIComponent(msg)}`);
+                          }}
+                          className="w-full inline-flex items-center justify-center gap-2 py-3.5 bg-emerald-600 hover:bg-emerald-700 text-white font-display font-semibold text-xs uppercase tracking-wider rounded-xl cursor-pointer transition-all active:scale-98 shadow-sm"
+                        >
+                          <MessageSquare className="w-4 h-4" />
+                          <span>Discuss on WhatsApp</span>
+                        </button>
+                      </div>
+
+                      {/* Interactive Session Booking */}
+                      <div className="lg:col-span-7 p-6 sm:p-8 bg-[#0D1640] rounded-2xl border border-blue-900/40 relative overflow-hidden text-white shadow-xl flex flex-col justify-between text-left">
+                        <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
+                        <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-[#C2A56D]/[0.03] blur-[80px] pointer-events-none" />
+
+                        <div className="relative z-10 w-full space-y-4">
+                          <div className="flex items-center gap-2">
+                            <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#C2A56D]/10 rounded-full border border-[#C2A56D]/20 text-[9px] text-[#C2A56D] font-mono tracking-widest font-bold uppercase">
+                              <Lock className="w-3 h-3" />
+                              Pre-Reserved Executive Allocation
+                            </span>
+                          </div>
+
+                          {!isBooked ? (
+                            <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+                              <div className="md:col-span-6 space-y-3">
+                                <h4 className="font-display font-medium text-lg text-white leading-tight">
+                                  Claim your <span className="font-serif italic text-[#C2A56D]">25-Page CEO Growth Strategy Blueprint</span> & call
+                                </h4>
+                                <p className="text-slate-300 font-sans text-xs leading-relaxed font-light">
+                                  An Avystra Scaling Partner is pre-reserved to spend 25 minutes debriefing your tactical contradictions and modeling execution fixes.
+                                </p>
+
+                                <div className="flex flex-wrap items-center gap-2 text-[10px] text-slate-300 font-mono pt-1">
+                                  <span className="flex items-center gap-1 bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-lg">
+                                    <Calendar className="w-3.5 h-3.5 text-[#C2A56D]" />
+                                    25 Min Call
+                                  </span>
+                                  <span className="flex items-center gap-1 bg-white/5 border border-white/10 px-2.5 py-1.5 rounded-lg">
+                                    <FileText className="w-3.5 h-3.5 text-[#C2A56D]" />
+                                    Free Blueprint
+                                  </span>
+                                </div>
+                              </div>
+
+                              <div className="md:col-span-6 bg-white/5 border border-white/10 p-4 rounded-xl text-left">
+                                <form onSubmit={handleBookingSubmit} className="space-y-3">
+                                  <label className="block text-[9px] font-mono uppercase tracking-wider text-slate-300 font-bold">
+                                    Select Primary Focus Theme
+                                  </label>
+
+                                  <div className="space-y-1.5">
+                                    {[
+                                      'De-bottleneck Founder Dependency',
+                                      'Standardize Manager Feedback Loops',
+                                      'Build Frictionless Accountability SOPs',
+                                      'Deploy Resilient Execution Plans'
+                                    ].map((topic) => (
+                                      <button
+                                        key={topic}
+                                        type="button"
+                                        onClick={() => setSelectedTopic(topic)}
+                                        className={`w-full text-left p-2 rounded-lg text-[11px] font-sans transition-all border ${
+                                          selectedTopic === topic
+                                            ? 'bg-[#C2A56D]/20 border-[#C2A56D] text-white font-medium'
+                                            : 'bg-white/0 border-white/5 hover:bg-white/5 text-slate-300'
+                                        }`}
+                                      >
+                                        {topic}
+                                      </button>
+                                    ))}
+                                  </div>
+
+                                  <button
+                                    type="submit"
+                                    disabled={bookingLoading}
+                                    className="w-full flex items-center justify-center gap-2 py-2.5 bg-[#C2A56D] hover:bg-[#A88D5A] disabled:bg-slate-700 text-[#091133] font-display font-semibold text-xs uppercase tracking-wider rounded-lg cursor-pointer transition-all active:scale-98"
+                                  >
+                                    {bookingLoading ? (
+                                      <>
+                                        <Loader2 className="w-3.5 h-3.5 animate-spin" />
+                                        <span>Securing...</span>
+                                      </>
+                                    ) : (
+                                      <>
+                                        <PhoneCall className="w-3.5 h-3.5" />
+                                        <span>Lock Audit Debrief</span>
+                                      </>
+                                    )}
+                                  </button>
+                                </form>
+                              </div>
+                            </div>
+                          ) : (
+                            <motion.div 
+                              initial={{ opacity: 0, y: 10 }}
+                              animate={{ opacity: 1, y: 0 }}
+                              className="text-center py-4"
+                            >
+                              <div className="w-10 h-10 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto mb-3">
+                                <Check className="w-5 h-5" />
+                              </div>
+
+                              <h4 className="font-display font-semibold text-base text-white mb-1">
+                                Audit Debrief Locked
+                              </h4>
+
+                              <p className="text-slate-300 font-sans text-xs max-w-md mx-auto leading-relaxed mb-4 font-light text-center">
+                                Thank you, {name}! Your preference for <strong className="text-white font-medium">"{selectedTopic}"</strong> has been prioritised. Our partner is preparing your Blueprint and will call you direct at <span className="text-[#C2A56D] font-mono">{contact}</span>.
+                              </p>
+
+                              <div className="inline-flex items-center gap-1.5 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[9px] px-3 py-1 rounded-full uppercase tracking-wider mx-auto">
+                                <span className="w-1 h-1 bg-emerald-400 rounded-full animate-ping" />
+                                Scheduled
+                              </div>
+                            </motion.div>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* 4. Disclaimer Section */}
+                    <div className="pt-6 border-t border-slate-100">
+                      <p className="text-[10px] text-slate-400 font-sans font-light leading-relaxed max-w-5xl text-left">
+                        The OGI is a directional self-reported assessment tool — not a professional organizational audit. It is based on the responses of a single individual and reflects one perspective. Results are indicative only. For a full organizational assessment, contact AVYSTRA directly at <span className="font-medium text-slate-500">info@avystra.co.in</span>.
                       </p>
                     </div>
 
                   </div>
 
-                  {/* 4 Dimension horizontal meters + interactive accordion detail info */}
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 mb-10">
-                    
-                    {/* Dimension selectors (Horizontal meters) */}
-                    <div className="lg:col-span-6 space-y-3">
-                      <h4 className="text-[10px] font-mono tracking-widest font-bold text-slate-400 uppercase mb-4">
-                        Organizational Dimension Indexes
-                      </h4>
-
-                      {[lData, mData, tData, eData].map((dim, idx) => {
-                        const code = ['L', 'M', 'T', 'E'][idx] as 'L' | 'M' | 'T' | 'E';
-                        const isActive = activeDimension === code;
-                        const statStyle = getPillarStatusStyle(dim.pct);
-                        const statText = getPillarStatusText(dim.pct);
-
-                        return (
-                          <div 
-                            key={code}
-                            onClick={() => setActiveDimension(code)}
-                            className={`p-4 rounded-2xl border text-left cursor-pointer transition-all ${
-                              isActive 
-                                ? 'bg-[#0A192F]/[0.02] border-[#C5A059] shadow-xs' 
-                                : 'bg-slate-50/50 border-slate-200/80 hover:border-[#C5A059]/40 hover:bg-white'
-                            }`}
-                          >
-                            <div className="flex items-center justify-between mb-2">
-                              <div className="flex items-center gap-2">
-                                <span className="w-5 h-5 rounded-md flex items-center justify-center text-[10px] text-white font-mono font-bold" style={{ backgroundColor: dim.color }}>
-                                  {code}
-                                </span>
-                                <span className="text-[12px] font-display font-bold text-[#0A192F]">{dim.label}</span>
-                              </div>
-                              <span className={`text-[9px] font-mono uppercase tracking-wider font-bold px-2 py-0.5 rounded-full border ${statStyle}`}>
-                                {statText}
-                              </span>
-                            </div>
-
-                            {/* Meter Bar */}
-                            <div className="flex items-center gap-3">
-                              <div className="h-1.5 flex-grow bg-slate-100 rounded-full overflow-hidden">
-                                <motion.div 
-                                  className="h-full rounded-full"
-                                  style={{ backgroundColor: dim.color }}
-                                  initial={{ width: 0 }}
-                                  animate={{ width: `${dim.pct}%` }}
-                                  transition={{ duration: 1, delay: 0.1 }}
-                                />
-                              </div>
-                              <span className="text-xs font-mono font-bold text-slate-700 min-w-[28px] text-right">
-                                {dim.pct}%
-                              </span>
-                            </div>
-                          </div>
-                        );
-                      })}
-                    </div>
-
-                    {/* Dimension Interactive Feedback Box */}
-                    <div className="lg:col-span-6 flex flex-col justify-between">
-                      <div className="p-6 rounded-2xl border border-[#C5A059]/20 bg-[#C5A059]/[0.02] h-full flex flex-col justify-between">
-                        <div>
-                          <div className="flex items-center gap-2 mb-4">
-                            <span 
-                              className="w-2.5 h-2.5 rounded-full" 
-                              style={{ 
-                                backgroundColor: activeDimension === 'L' ? '#1B2A6B' : 
-                                                 activeDimension === 'M' ? '#C9A84C' : 
-                                                 activeDimension === 'T' ? '#3B82F6' : '#10B981' 
-                              }}
-                            />
-                            <h5 className="text-[11px] font-mono uppercase tracking-wider font-bold text-slate-400">
-                              Detailed Dimension Analysis
-                            </h5>
-                          </div>
-
-                          <h4 className="font-display font-bold text-lg text-[#0A192F] mb-3">
-                            {
-                              activeDimension === 'L' ? 'Leadership & Direction Insights' : 
-                              activeDimension === 'M' ? 'Manager Effectiveness Insights' : 
-                              activeDimension === 'T' ? 'Team Accountability Insights' : 'Execution Systems Insights'
-                            }
-                          </h4>
-
-                          <p className="text-slate-600 font-sans text-sm leading-relaxed font-light">
-                            {getPillarFeedbackText(activeDimension)}
-                          </p>
-                        </div>
-
-                        <div className="pt-4 border-t border-[#C5A059]/10 mt-6 text-[10px] font-mono text-slate-400 uppercase tracking-widest">
-                          Click any other dimension to inspect strategic recommendations
-                        </div>
-                      </div>
-                    </div>
-
+                  {/* Footer restart and navigation hooks */}
+                  <div className="flex flex-col sm:flex-row items-center gap-4 pt-8 mt-10 border-t border-slate-100">
+                    <button
+                      onClick={handleRestart}
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-mono font-bold text-slate-400 hover:text-[#C2A56D] uppercase tracking-wider bg-slate-50 hover:bg-slate-100 border border-slate-200 px-6 py-3.5 rounded-xl cursor-pointer transition-all active:scale-95"
+                    >
+                      <RotateCcw className="w-3.5 h-3.5" />
+                      Restart Assessment
+                    </button>
+                    <a 
+                      href="#team"
+                      onClick={(e) => {
+                        e.preventDefault();
+                        const el = document.getElementById('team');
+                        if (el && (window as any).lenis) {
+                          (window as any).lenis.scrollTo(el, { offset: -95, duration: 1.2 });
+                        }
+                      }}
+                      className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-display font-bold text-slate-500 hover:text-[#2C3947] uppercase tracking-wider px-6 py-3.5 rounded-xl cursor-pointer transition-all"
+                    >
+                      Meet our Partners
+                    </a>
                   </div>
-
-                  {/* Contradiction Detections Alert block */}
-                  <div className="mb-10">
-                    <h4 className="text-[10px] font-mono tracking-widest font-bold text-slate-400 uppercase mb-4">
-                      Execution Safeguards & Contradiction Audit
-                    </h4>
-
-                    {contradictions.length > 0 ? (
-                      <div className="space-y-4">
-                        {contradictions.map((contra) => (
-                          <div key={contra.id} className="p-5 sm:p-6 bg-rose-50/70 border border-rose-100 rounded-2xl">
-                            <div className="flex items-start gap-4">
-                              <div className="p-2 bg-rose-100 text-rose-700 rounded-xl mt-0.5">
-                                <AlertTriangle className="w-5 h-5" />
-                              </div>
-
-                              <div className="space-y-2 flex-grow">
-                                <div className="flex flex-wrap items-center justify-between gap-2">
-                                  <h5 className="font-display font-bold text-sm sm:text-base text-rose-900">
-                                    {contra.title}
-                                  </h5>
-                                  <div className="flex items-center gap-1">
-                                    {contra.questionsInvolved.map(q => (
-                                      <span key={q} className="text-[8px] font-mono bg-rose-100 text-rose-700 font-bold px-1.5 py-0.5 rounded">
-                                        {q}
-                                      </span>
-                                    ))}
-                                    <span className="text-[9px] font-mono text-rose-500 uppercase font-bold tracking-wider ml-1.5">
-                                      Conflict Triggered
-                                    </span>
-                                  </div>
-                                </div>
-
-                                <p className="text-rose-900/80 text-xs sm:text-sm font-sans leading-relaxed">
-                                  {contra.description}
-                                </p>
-
-                                <div className="p-3 bg-white/60 border border-rose-200/50 rounded-xl mt-3 grid grid-cols-1 md:grid-cols-2 gap-4">
-                                  <div>
-                                    <strong className="block text-[9px] font-mono uppercase tracking-wider text-rose-700">Strategic Risk</strong>
-                                    <p className="text-[11px] sm:text-xs text-rose-900/90 leading-relaxed font-light">{contra.risk}</p>
-                                  </div>
-                                  <div>
-                                    <strong className="block text-[9px] font-mono uppercase tracking-wider text-emerald-700">Structural Antidote</strong>
-                                    <p className="text-[11px] sm:text-xs text-emerald-900/90 leading-relaxed font-light">{contra.antidote}</p>
-                                  </div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    ) : (
-                      <div className="p-5 sm:p-6 bg-emerald-50/50 border border-emerald-100 rounded-2xl flex items-center gap-4">
-                        <div className="p-2.5 bg-emerald-100 text-emerald-600 rounded-full">
-                          <ShieldCheck className="w-6 h-6" />
-                        </div>
-                        <div>
-                          <h5 className="font-display font-bold text-sm sm:text-base text-emerald-900 mb-0.5">
-                            Sovereign Alignment Seal
-                          </h5>
-                          <p className="text-emerald-800 text-xs sm:text-sm font-sans font-light leading-relaxed">
-                            Excellent operational consistency. No logical or strategic contradictions were detected between your alignment answers and executive workflow responses.
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* HIGHLY PERSONALIST LEAD CAPTURE BOOKING FORM */}
-                  <div className="p-6 sm:p-8 bg-[#0D1640] rounded-2xl border border-blue-900/40 relative overflow-hidden text-white shadow-xl">
-                    <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:16px_16px] pointer-events-none" />
-                    <div className="absolute top-0 right-0 w-[300px] h-[300px] rounded-full bg-[#C5A059]/[0.03] blur-[80px] pointer-events-none" />
-
-                    <div className="relative z-10 max-w-3xl">
-                      <div className="flex items-center gap-2 mb-4">
-                        <span className="inline-flex items-center gap-1.5 px-2.5 py-0.5 bg-[#C5A059]/10 rounded-full border border-[#C5A059]/20 text-[9px] text-[#C5A059] font-mono tracking-widest font-bold uppercase">
-                          <Lock className="w-3 h-3" />
-                          Pre-Reserved Executive Allocation
-                        </span>
-                      </div>
-
-                      {!isBooked ? (
-                        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
-                          <div className="lg:col-span-7 space-y-4">
-                            <h4 className="font-display font-medium text-xl sm:text-2xl text-white leading-tight">
-                              Claim your <span className="font-serif italic text-[#C5A059]">25-Page CEO Growth Strategy Blueprint</span> & diagnostic call
-                            </h4>
-                            <p className="text-slate-300 font-sans text-xs sm:text-sm leading-relaxed font-light">
-                              {name}, based on your overall rating of <strong className="text-white font-semibold">{overallScorePct}% ({tierName})</strong>, an Avystra Scaling Partner is pre-reserved to spend 25 minutes debriefing your tactical contradictions and modeling execution fixes.
-                            </p>
-
-                            <div className="flex flex-wrap items-center gap-3 text-xs text-slate-300 font-mono">
-                              <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
-                                <Calendar className="w-3.5 h-3.5 text-[#C5A059]" />
-                                Duration: 25 Min
-                              </span>
-                              <span className="flex items-center gap-1.5 bg-white/5 border border-white/10 px-3 py-1.5 rounded-lg">
-                                <FileText className="w-3.5 h-3.5 text-[#C5A059]" />
-                                Premium Blueprint Included
-                              </span>
-                            </div>
-                          </div>
-
-                          {/* Interactive Subject option submission form */}
-                          <div className="lg:col-span-5 bg-white/5 border border-white/10 p-5 rounded-xl text-left">
-                            <form onSubmit={handleBookingSubmit} className="space-y-4">
-                              <label className="block text-[9px] font-mono uppercase tracking-wider text-slate-300 font-bold">
-                                Select Primary Focus Theme
-                              </label>
-
-                              <div className="space-y-2">
-                                {[
-                                  'De-bottleneck Founder Dependency',
-                                  'Standardize Manager Feedback Loops',
-                                  'Build Frictionless Accountability SOPs',
-                                  'Deploy Resilient Execution Plans'
-                                ].map((topic) => (
-                                  <button
-                                    key={topic}
-                                    type="button"
-                                    onClick={() => setSelectedTopic(topic)}
-                                    className={`w-full text-left p-2.5 rounded-lg text-xs font-sans transition-all border ${
-                                      selectedTopic === topic
-                                        ? 'bg-[#C5A059]/20 border-[#C5A059] text-white font-medium'
-                                        : 'bg-white/0 border-white/5 hover:bg-white/5 text-slate-300'
-                                    }`}
-                                  >
-                                    {topic}
-                                  </button>
-                                ))}
-                              </div>
-
-                              <button
-                                type="submit"
-                                disabled={bookingLoading}
-                                className="w-full flex items-center justify-center gap-2 py-3 bg-[#C5A059] hover:bg-[#A68449] disabled:bg-slate-700 text-[#091133] font-display font-semibold text-xs uppercase tracking-wider rounded-lg border border-[#C5A059] cursor-pointer transition-all active:scale-98"
-                              >
-                                {bookingLoading ? (
-                                  <>
-                                    <Loader2 className="w-3.5 h-3.5 animate-spin" />
-                                    <span>Securing Session...</span>
-                                  </>
-                                ) : (
-                                  <>
-                                    <PhoneCall className="w-3.5 h-3.5" />
-                                    <span>Lock Audit Debrief</span>
-                                  </>
-                                )}
-                              </button>
-                            </form>
-                          </div>
-                        </div>
-                      ) : (
-                        <motion.div 
-                          initial={{ opacity: 0, y: 10 }}
-                          animate={{ opacity: 1, y: 0 }}
-                          className="text-center py-6"
-                        >
-                          <div className="w-12 h-12 rounded-full bg-emerald-500/20 border border-emerald-500/40 text-emerald-400 flex items-center justify-center mx-auto mb-4">
-                            <Check className="w-6 h-6" />
-                          </div>
-
-                          <h4 className="font-display font-semibold text-xl text-white mb-2">
-                            Audit Debrief Successfully Locked
-                          </h4>
-
-                          <p className="text-slate-300 font-sans text-xs sm:text-sm max-w-lg mx-auto leading-relaxed mb-6 font-light">
-                            Thank you, {name}! Your preference for <strong className="text-white font-medium">"{selectedTopic}"</strong> has been prioritised. Our coordinating partner is preparing your custom CEO Growth Blueprint and will reach out at <span className="text-emerald-400 font-mono">{contact}</span> directly within 12 business hours.
-                          </p>
-
-                          <div className="inline-flex items-center gap-2 bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 font-mono text-[9px] px-3.5 py-1.5 rounded-full uppercase tracking-wider">
-                            <span className="w-1.5 h-1.5 bg-emerald-400 rounded-full animate-ping" />
-                            Pre-Audit Briefing Scheduled
-                          </div>
-                        </motion.div>
-                      )}
-                    </div>
-                  </div>
-
-                </div>
-
-                {/* Footer restart and navigation hooks */}
-                <div className="flex flex-col sm:flex-row items-center gap-4 pt-8 mt-10 border-t border-slate-100">
-                  <button
-                    onClick={handleRestart}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-mono font-bold text-slate-400 hover:text-[#C5A059] uppercase tracking-wider bg-slate-50 hover:bg-slate-100 border border-slate-200 px-6 py-3.5 rounded-xl cursor-pointer transition-all active:scale-95"
-                  >
-                    <RotateCcw className="w-3.5 h-3.5" />
-                    Restart Assessment
-                  </button>
-                  <a 
-                    href="#team"
-                    onClick={(e) => {
-                      e.preventDefault();
-                      const el = document.getElementById('team');
-                      if (el && (window as any).lenis) {
-                        (window as any).lenis.scrollTo(el, { offset: -95, duration: 1.2 });
-                      }
-                    }}
-                    className="w-full sm:w-auto inline-flex items-center justify-center gap-2 text-xs font-display font-bold text-slate-500 hover:text-[#0A192F] uppercase tracking-wider px-6 py-3.5 rounded-xl cursor-pointer transition-all"
-                  >
-                    Meet our Partners
-                  </a>
-                </div>
-              </motion.div>
-            )}
+                </motion.div>
+              );
+            })()}
 
           </AnimatePresence>
 

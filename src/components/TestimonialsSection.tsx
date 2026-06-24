@@ -1,7 +1,5 @@
-import React from 'react';
 import { Quote, Star, MessageSquare } from 'lucide-react';
 import { motion } from 'motion/react';
-import { BackgroundGlowBlob } from './DoodleWidgets';
 import TextReveal from './TextReveal';
 
 interface Testimonial {
@@ -52,11 +50,11 @@ export default function TestimonialsSection() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="flex flex-col items-center text-center max-w-3xl mx-auto mb-10 md:mb-12"
+          className="flex flex-col items-center text-center max-w-3xl mx-auto mb-6 md:mb-8"
         >
           
           {/* Aesthetic Capsule Badge */}
-          <div className="border border-[#C5A059]/20 liquid-glass px-4 py-1.5 rounded-full inline-flex items-center gap-2.5 mb-6 shadow-sm">
+          <div className="border border-[#C5A059]/20 bg-gradient-to-br from-white to-slate-50 px-4 py-1.5 rounded-full inline-flex items-center gap-2.5 mb-3 shadow-sm">
             <MessageSquare className="w-3.5 h-3.5 text-[#C5A059]" />
             <span className="text-[10px] text-[#C5A059] font-mono tracking-[0.18em] font-medium uppercase">
               Client Success Stories
@@ -77,7 +75,7 @@ export default function TestimonialsSection() {
           {testimonials.map((testimonial) => (
             <div
               key={testimonial.id}
-              className="gsap-stagger-card group relative liquid-glass rounded-2xl p-8 sm:p-10 transition-all duration-700 hover:border-[#C5A059]/40 hover:shadow-[0_40px_80px_-20px_rgba(15,23,42,0.12)] hover:-translate-y-2 hover:scale-[1.01] flex flex-col justify-between will-change-transform"
+              className="gsap-stagger-card group relative bg-gradient-to-br from-white to-slate-50 border border-slate-100 rounded-2xl p-8 sm:p-10 transition-all duration-700 hover:border-[#C5A059]/40 hover:shadow-[0_40px_80px_-20px_rgba(15,23,42,0.12)] hover:-translate-y-2 hover:scale-[1.01] flex flex-col justify-between will-change-transform"
               id={`testimonial-card-${testimonial.id}`}
             >
               <div>

@@ -1,8 +1,7 @@
 import React, { useRef } from 'react';
 import { Compass, Target, Users, Landmark, Award, ChevronRight } from 'lucide-react';
 import { motion } from 'motion/react';
-import { DoodleSparkle } from './DoodleWidgets';
-import { elegantEase, getPrefersReducedMotion } from '../lib/animations';
+import { DoodleSparkle, UnderlineSquiggle } from './DoodleWidgets';
 import TextReveal from './TextReveal';
 
 
@@ -69,24 +68,21 @@ export default function FourPillars() {
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, margin: "-20px" }}
           transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
-          className="max-w-4xl mb-12 md:mb-16"
+          className="max-w-4xl mb-6 md:mb-8"
         >
-          <div className="inline-flex items-center gap-2 liquid-glass px-4 py-2 rounded-full mb-8">
+          <div className="inline-flex items-center gap-2 bg-gradient-to-br from-white to-slate-50 border border-slate-100 px-4 py-2 rounded-full mb-3">
             <Award className="w-4 h-4 text-[#C5A059]" />
             <span className="text-[10px] text-slate-600 font-mono tracking-[0.2em] font-black uppercase">
               The Framework for Autonomy
             </span>
           </div>
 
-          <h2 className="font-display font-medium text-4xl sm:text-5xl md:text-6xl text-[#0A192F] tracking-tight leading-[1.1] mb-8 inline-flex flex-wrap gap-x-2">
-            <TextReveal text="Closing the gap between " delay={0.2} blur={true} wordClassName="inline-block" />
-            <TextReveal text="knowing" delay={0.5} blur={true} wordClassName="font-serif italic font-light text-[#C5A059] inline-block" />
-            <TextReveal text="and" delay={0.6} blur={true} wordClassName="inline-block" />
-            <TextReveal text="doing." delay={0.7} blur={true} wordClassName="font-serif italic font-light text-[#C5A059] inline-block" />
+          <h2 className="font-display font-bold text-4xl sm:text-5xl md:text-6xl text-[#0A192F] tracking-tight leading-[1.1] mb-4 uppercase">
+            The Four Pillars of <span className="font-serif italic font-light text-[#C5A059] relative inline-block px-1">Organizational Excellence<UnderlineSquiggle className="text-[#C5A059]" duration={1.5} delay={0.4} /></span>
           </h2>
           
           <TextReveal 
-            text="Success isn't found in strategy alone. It exists in the systems that bridge the void between executive vision and daily operational reality."
+            text="Sustainable performance isn't accidental. It's built on four pillars that strengthen your organization from the inside out."
             as="p"
             className="text-slate-500 font-sans text-lg md:text-xl font-light leading-relaxed max-w-2xl"
             delay={0.8}
@@ -106,7 +102,7 @@ export default function FourPillars() {
               whileHover={{ y: -8 }}
               className="pillar-card group relative h-full flex flex-col"
             >
-              <div className="relative h-full liquid-glass transition-all duration-700 rounded-[2.5rem] p-8 md:p-10 group-hover:shadow-[0_40px_80px_-20px_rgba(15,23,42,0.12)] group-hover:border-[#C5A059]/40 flex flex-col justify-between overflow-hidden will-change-transform">
+              <div className="relative h-full bg-gradient-to-br from-white to-slate-50 border border-slate-100 transition-all duration-700 rounded-[2.5rem] p-8 md:p-10 group-hover:shadow-[0_40px_80px_-20px_rgba(15,23,42,0.12)] group-hover:border-[#C5A059]/40 flex flex-col justify-between overflow-hidden will-change-transform">
                 
                 {/* Background Number Accent */}
                 <span className="absolute top-6 right-8 text-7xl font-serif font-black text-slate-200/30 group-hover:text-slate-300/40 transition-colors duration-700 select-none z-0">
@@ -115,7 +111,7 @@ export default function FourPillars() {
 
                 <div className="relative z-10">
                   {/* Icon Slot */}
-                  <div className="mb-10 inline-flex p-4 rounded-2xl liquid-glass text-[#C5A059] group-hover:bg-[#C5A059]/10 group-hover:scale-110 transition-all duration-500">
+                  <div className="mb-10 inline-flex p-4 rounded-2xl bg-gradient-to-br from-white to-slate-50 border border-slate-100 text-[#C5A059] group-hover:bg-[#C5A059]/10 group-hover:scale-110 transition-all duration-500">
                     {pillar.icon}
                   </div>
 
@@ -130,7 +126,7 @@ export default function FourPillars() {
                   </h3>
                   
                   {/* Description */}
-                  <p className="text-slate-500 text-sm md:text-[15px] font-light leading-relaxed transition-colors duration-500 group-hover:text-slate-700">
+                  <p className="text-slate-500 text-sm md:text-[15px] font-light leading-relaxed transition-colors duration-500 group-hover:text-slate-700 break-words">
                     {pillar.description}
                   </p>
                 </div>

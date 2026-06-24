@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import Lenis from "lenis";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { elegantEase, getPrefersReducedMotion } from "../lib/animations";
+import { getPrefersReducedMotion } from "../lib/animations";
 
 export function useSmoothScroll() {
   useEffect(() => {
@@ -23,15 +23,36 @@ export function useSmoothScroll() {
       return;
     }
 
-    // Initialize Lenis
+    // Initialize Lenis with autoRaf disabled to delegate frame loop perfectly to GSAP
     const lenis = new Lenis({
-      lerp: 0.08,
+      lerp: 0.1,
       smoothWheel: true,
       syncTouch: false, // Keep touch input native for perfect mobile interaction
       infinite: false,
+      autoRaf: false, // Bypasses internal rendering loop to avoid dual-tick stuttering
     });
 
     (window as any).lenis = lenis;
+
+    // Intercept clicks on links that target hashes and handle them smoothly via Lenis
+    const handleHashClick = (e: MouseEvent) => {
+      const target = e.target as HTMLElement;
+      const anchor = target.closest("a");
+      if (anchor) {
+        const href = anchor.getAttribute("href");
+        if (href && href.startsWith("#")) {
+          e.preventDefault();
+          const targetId = href.substring(1);
+          const element = document.getElementById(targetId);
+          if (element) {
+            lenis.scrollTo(element, { offset: -90, duration: 1.25 });
+          } else if (href === "#") {
+            lenis.scrollTo(0, { duration: 1.25 });
+          }
+        }
+      }
+    };
+    document.addEventListener("click", handleHashClick);
 
     // Sync Lenis with ScrollTrigger
     lenis.on("scroll", ScrollTrigger.update);
@@ -60,16 +81,26 @@ export function useSmoothScroll() {
     //   },
     // });
 
-    // Dynamic Height recalculation with ResizeObserver
-    const resizeObserver = new ResizeObserver(() => {
-      ScrollTrigger.refresh();
-      lenis.resize();
-    });
-    resizeObserver.observe(document.body);
+    // Debounced window resize event listener to prevent layout thrashing and keep calculations perfectly aligned
+    let resizeTimeout: any = null;
+    const handleResize = () => {
+      if (resizeTimeout) {
+        window.clearTimeout(resizeTimeout);
+      }
+      resizeTimeout = window.setTimeout(() => {
+        ScrollTrigger.refresh();
+        lenis.resize();
+      }, 200);
+    };
+    window.addEventListener("resize", handleResize);
 
     return () => {
+      document.removeEventListener("click", handleHashClick);
       lenis.destroy();
-      resizeObserver.disconnect();
+      window.removeEventListener("resize", handleResize);
+      if (resizeTimeout) {
+        window.clearTimeout(resizeTimeout);
+      }
       gsap.ticker.remove(tickerCallback);
       ScrollTrigger.getAll().forEach((t) => t.kill());
     };

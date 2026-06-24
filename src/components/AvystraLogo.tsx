@@ -1,5 +1,3 @@
-import React from 'react';
-
 interface AvystraLogoProps {
   className?: string;
   iconOnly?: boolean;
@@ -83,6 +81,9 @@ export default function AvystraLogo({
             <span className={textColorClass}>V</span>
             <span className="text-[#C5A059]">Y</span>
             <span className={textColorClass}>STRΛ</span>
+          </div>
+          <div className={`${current.fontSize} font-medium tracking-wide font-sans mt-0.5 ${textColorClass} select-none`} id="logo-consulting">
+             Consulting Pvt. Ltd.
           </div>
 
           {/* Subtitle / Tagline under a thin rule */}

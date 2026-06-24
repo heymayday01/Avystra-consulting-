@@ -67,7 +67,7 @@ async function startServer() {
   // API Routes
   app.use('/api/leads', leadRoutes);
 
-  app.get('/api/health', (req, res) => {
+  app.get('/api/health', (_req, res) => {
     res.json({
       status: 'ok',
       timestamp: new Date().toISOString(),
@@ -106,14 +106,14 @@ async function startServer() {
   } else {
     const distPath = path.join(process.cwd(), 'dist');
     app.use(express.static(distPath));
-    app.get('*', (req, res) => {
+    app.get('*', (_req, res) => {
       res.sendFile(path.join(distPath, 'index.html'));
     });
     console.log('[Express] Production serving active.');
   }
 
   // Global Error Handler
-  app.use((err: any, req: express.Request, res: express.Response, next: express.NextFunction) => {
+  app.use((err: any, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
     console.error('[Unhandled Server Error]:', err);
     res.status(500).json({
       error: 'Internal Server Error',

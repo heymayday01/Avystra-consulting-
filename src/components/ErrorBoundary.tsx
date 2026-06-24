@@ -1,4 +1,4 @@
-import React, { Component, ErrorInfo, ReactNode } from "react";
+import React, { ErrorInfo, ReactNode } from "react";
 
 interface Props {
   children?: ReactNode;
@@ -9,10 +9,11 @@ interface State {
   error?: Error;
 }
 
-export class ErrorBoundary extends Component<Props, State> {
-  public state: State = {
-    hasError: false
-  };
+export class ErrorBoundary extends React.Component<Props, State> {
+  constructor(props: Props) {
+    super(props);
+    this.state = { hasError: false };
+  }
 
   public static getDerivedStateFromError(error: Error): State {
     // Update state so the next render will show the fallback UI.
